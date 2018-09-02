@@ -24,6 +24,7 @@
 #include "emit.h"
 #include "fmacros.h" // forth macros
 #include "programs.h"
+#include "asm_test.h"
 
 int linelen = LLENGTH; // = 28
 
@@ -52,6 +53,7 @@ NAMED(_nopp, "nop");  // swapped _name with _nop
 void nopp(void) { }
 
 void help(void) {
+    asm_test(); // test of almost empty asm function with multiple nop
     io_write(io, (uint8_t *) "    type 'words' instead of 'help'.\r\n\r\n",   39);
     io_write(io, (uint8_t *) "    8304 16 dump              \r\n\r\n",        34);
     io_write(io, (uint8_t *) "    1 2 3 4 5 6 7 64  prog_a    \r\n\r\n",      36);
@@ -60,6 +62,7 @@ void help(void) {
     io_write(io, (uint8_t *) "                           536870912  decimal.\r\n", 48);
     io_write(io, (uint8_t *) "    536870912  12288  dump ",                   27);
     io_write(io, (uint8_t *) "    will dump all of sram \r\n",                28);
+    io_write(io, (uint8_t *) "\r\n\r\n    test of asm here as well. \r\n\r\n",        38);
 }
                            // 123456789012345678901234567890123456789012345678901234567890
 /*
