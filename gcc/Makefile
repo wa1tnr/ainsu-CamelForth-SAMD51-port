@@ -89,6 +89,7 @@ src/math.o \
 src/ascii_art.o \
 src/emit.o \
 src/programs.o \
+src/asm_test.o \
 main.o
 
 OBJS_AS_ARGS +=  \
@@ -134,6 +135,7 @@ OBJS_AS_ARGS +=  \
 "src/ascii_art.o" \
 "src/emit.o" \
 "src/programs.o" \
+"src/asm_test.o" \
 "main.o"
 
 # List the dependency files
@@ -182,6 +184,7 @@ DEPS_AS_ARGS +=  \
 "src/ascii_art.d" \
 "src/emit.d" \
 "src/programs.d" \
+"src/asm_test.d" \
 "main.d"
 
 OUTPUT_FILE_NAME :=AtmelStart
