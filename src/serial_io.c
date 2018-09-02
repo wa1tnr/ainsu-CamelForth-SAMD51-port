@@ -1,15 +1,8 @@
-// Sun Sep  2 06:00:34 UTC 2018
+// Sun Sep  2 20:17:50 UTC 2018
 // On branch zKM_converser_d51-aa-
 
 /* wa1tnr - September, 2018 LGPL v2.1 */
 
-// Fri Aug 31 22:41:08 UTC 2018
-// On branch zKM_converser_d51-aa-
-// Fri Aug 31 04:04:41 UTC 2018
-// On branch xKM_converser_d51-pp-
-// Fri Aug 31 02:48:02 UTC 2018
-// Thu Aug 30 04:17:15 UTC 2018
-// On branch xKM_converser_d51-pp-
 // Wed Aug 29 05:03:11 UTC 2018
 // On branch xKM_converser_d51-nn-
 
@@ -26,15 +19,16 @@
 #include "dict_common.h"
 
 #define timeStamp(t,l) \
-    "Sun Sep  2 06:00:34 UTC 2018\r\n\r\n", 32
-
-/*
-#define branchStamp(b,l) \
-  "zKM_converser_d51-aa-    ", 25
-*/
+    "Sun Sep  2 20:17:50 UTC 2018\r\n\r\n", 32
 
 // current target branch:
+#define branchStamp(b,l) \
+  "zKM_converser_d51-aa- +asm   ", 29
+// 123456789012345678901234567890
+
+/*
 #define branchStamp(b,l) "KM_converser_d51         ", 25
+*/
 
 /*
 #define branchStamp(b,l) "master                   ", 25
