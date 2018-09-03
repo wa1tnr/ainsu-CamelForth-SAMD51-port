@@ -1,7 +1,10 @@
-// Sun Sep  2 20:17:50 UTC 2018
-// On branch zKM_converser_d51-aa-
+// Mon Sep  3 04:16:52 UTC 2018
+// On branch camel_forth_e_00a-
 
 /* wa1tnr - September, 2018 LGPL v2.1 */
+
+// Sun Sep  2 20:17:50 UTC 2018
+// On branch zKM_converser_d51-aa-
 
 // Wed Aug 29 05:03:11 UTC 2018
 // On branch xKM_converser_d51-nn-
@@ -19,12 +22,13 @@
 #include "dict_common.h"
 
 #define timeStamp(t,l) \
-    "Sun Sep  2 20:17:50 UTC 2018\r\n\r\n", 32
+    "Mon Sep  3 04:16:52 UTC 2018\r\n\r\n", 32
 
 // current target branch:
 #define branchStamp(b,l) \
-  "zKM_converser_d51-aa- +asm   ", 29
-// 123456789012345678901234567890
+    "On branch camel_forth_e_00a-   ", 31
+// "zKM_converser_d51-aa- +CamelForth +asm   ", 41
+// 1234567 101234567 201234567 301234567 4012345678901234567890
 
 /*
 #define branchStamp(b,l) "KM_converser_d51         ", 25
