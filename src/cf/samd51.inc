@@ -1,4 +1,5 @@
-/****h* camelforth/tivaio.c
+/****h* camelforth/samd51.inc
+ ****h* camelforth/tivaio.c
  * NAME
  *  tivaio.c
  * DESCRIPTION
@@ -37,11 +38,27 @@
  *  or via email to bj@camelforth.com
  */
 
+/*
 #include <stdint.h>
 #include <stdbool.h>
-#define NULL 0
+*/
 
-/* TivaWare functions */
+#include <atmel_start.h>
+
+// extern struct io_descriptor *io;
+#include "serial_io.h"  // io_write's  'io'
+#include "common.h"     // ainsu: maxtib
+#include "stack_ops.h"  // ainsu push(int p)
+#include "emit.h"       // ainsu emit
+#include "getKey.h"     // ainsu
+
+// #define NULL 0  // already defined for Atmel Start and gcc:
+
+// lib/gcc/arm-none-eabi/7.3.1/include/stddef.h:406:0: note: this is the location of the previous definition
+// #define NULL ((void *)0)
+
+// TivaWare functions //
+/*
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
 
@@ -56,9 +73,10 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
+*/
 
-/* Use SYSCTL_XTAL_25MHZ for TM4C129 Launchpad. */
-#define SYSCTL_XTAL_MHZ SYSCTL_XTAL_25MHZ
+// Use SYSCTL_XTAL_25MHZ for TM4C129 Launchpad. //
+// #define SYSCTL_XTAL_MHZ SYSCTL_XTAL_25MHZ
 
 
 /****f* main/ConfigureUART
@@ -74,6 +92,7 @@
  ******
  */
 
+/*
 void ConfigureUART(uint32_t clockfreq)
 {
     // Enable the GPIO Peripheral used by the UART.
@@ -90,21 +109,33 @@ void ConfigureUART(uint32_t clockfreq)
     // Initialize the UART for terminal I/O at 115.2 Kbaud
     UARTStdioConfig(0, 115200, clockfreq);
 }
+*/
 
 /*
  * Terminal I/O functions
  */
 
-#define printf UARTprintf
-#define getch UARTgetc
+// #define printf UARTprintf
+#define print_this(s,l) io_write(io, (uint8_t *)s, l);
+// #define getch UARTgetc
+#define getch getKey
 
 void putch(char c) {
+    push(c); emit();
     // UARTwrite(&c, 1);        
-    io_write(&c, 1);
+    // io_write(io, (uint8_t *)&c, 1);
 }
 
 int getquery(void) {
-    return(UARTCharsAvail(UART0_BASE) != 0);
+    // return(UARTCharsAvail(UART0_BASE) != 0);
+    int not_found = 1;
+    while(not_found) {
+        queryKey(); // sets read_ln;
+        if (read_ln > 0) not_found = 0; // escape loop
+    }
+    // return(UARTCharsAvail(UART0_BASE) != 0);
+    io_write(io, (uint8_t *)" !chars! ", 9);
+    return read_ln; // can be more than 1
 }
 
 /****f* main/main
@@ -117,36 +148,47 @@ int getquery(void) {
  ******
  */
 
-uint32_t g_ui32SysClock;        /* global variable */
+/*
+uint32_t g_ui32SysClock;        // global variable //
+*/
 
 void interpreter(void);         /* forward reference */
 
-int main(void)
+void camelforth(void)
 {
     // ----- THE FOLLOWING IS ADAPATED FROM TI INITIALIZATION CODE -----
 
     // Set the clocking to run from the crystal at 120MHz.
+/*
     g_ui32SysClock = MAP_SysCtlClockFreqSet((SYSCTL_XTAL_MHZ |
                                              SYSCTL_OSC_MAIN |
                                              SYSCTL_USE_PLL |
                                              SYSCTL_CFG_VCO_480), 120000000);   
+*/
 
     // Initialize Launchpad-specific I/O
     // Enable the GPIO port that is used for the on-board LEDs.
+/*
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
+*/
 
     // Enable the GPIO pins for the LEDs (PN0 & PN1).
     // initially PN0 off, PN1 on
+/*
     ROM_GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_0 | GPIO_PIN_1);
     ROM_GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_1);
+*/
     
     // Initialize UART0 for terminal I/O
+/*
     ConfigureUART(g_ui32SysClock);  // this enables UART0 and GPIOA.
+*/
     
     // ------------- END OF ADAPTED TI INITIALIZATION CODE -------------
 
     while (1) {     /* loop in case interpreter() ever terminates */
-        UARTprintf("\nCamelForth in C - Tiva-C testing\n");
+        // UARTprintf("\nCamelForth in C - Tiva-C testing\n");
+        print_this("\nCamelForth in C - SAMD51 testing\n", 34);
         interpreter();
     }
 }

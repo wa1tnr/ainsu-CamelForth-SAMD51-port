@@ -128,7 +128,7 @@ void dotS(void) { // .s  (in the interpreter)
     dotsRp();
 }
 
-void rstack(void) {
+void ainsu_rstack(void) {
     rev_coll_stack();
 }
 

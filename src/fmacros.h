@@ -99,7 +99,7 @@
 
 // Call next_char_prog_a() as required.
 #define fmac_prog_a()                                           \
-                                       rstack();   back();      \
+                                       ainsu_rstack();   back();      \
                       swap();           plus();    emit();      \
     back(); back();   swap();           plus();    emit();      \
     back(); back();   swap();  drop();  plus();    emit();      \

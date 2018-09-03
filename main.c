@@ -10,6 +10,7 @@
 #include "common.h"
 #include "itoa.h"
 #include "stack_ops.h"
+#include "forth.h"
 
 // previous:
 // Tue Aug 28 19:29:30 UTC 2018 // On branch xKM_converser_d51-kk-
@@ -74,10 +75,10 @@ int main(void)
 
     // 0x40000 size of internal flashROM (256 kb)
 
-#define OFFSET 8304 // 8304  $2070
+#define LOCAL_AINSU_OFFSET 8304 // 8304  $2070
 
     if (xec != 0) {
-        push(OFFSET);
+        push(LOCAL_AINSU_OFFSET);
 
         // 46 seconds
         // for (int jk = 0x800; jk > 0; jk--) {

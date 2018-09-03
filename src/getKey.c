@@ -9,16 +9,21 @@
 #include "serial_io.h"
 
 char ch[0]; // holds an 8-bit keystroke
+int read_ln = 0; // how many chars were read
 
 /* Terminal Input Buffer for interpreter */
 char tib[maxtib];
 
 void _USART_read(void) { // hardware implementation-dependent keystroke reader
     // getKey:
- // io_read(io,  (uint8_t *)tib, 1); // 1  is length
-    io_read(io,  (uint8_t *)ch, 1); // 1  is length
+    // io_read(io,  (uint8_t *)tib, 1); // 1  is length
+    read_ln = io_read(io,  (uint8_t *)ch, 1); // 1  is length
 }
 
 void getKey(void) { // hardware-independent wrapper
+    _USART_read();
+}
+
+void queryKey(void) {
     _USART_read();
 }

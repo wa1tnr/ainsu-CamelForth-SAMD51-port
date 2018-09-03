@@ -41,7 +41,11 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 #include "forth.h"
+#include "common.h" // ainsu
+#include "itoa.h"   // ainsu
+#include "itoacf.h" // ainsu
 
 /*
  * DATA STACKS
@@ -72,6 +76,9 @@ unsigned char ROMDICT[1024];
 #include "tivaio.inc"
 #endif
 
+#ifdef SAMD51
+#include "samd51.inc"
+#endif
 
 /* 
  * RUN-TIME FUNCTIONS FOR DEFINED WORDS
@@ -572,7 +579,10 @@ CODE(sequal) {  /* c-addr1 c-addr2 u -- n */
 
 CODE(key) {
     // *--psp = (unsigned int)getch();
-    *--psp = (unsigned int)getKey(); // ainsu
+    getKey();
+    uint8_t ch_read = (uint32_t) ch[0];
+    io_write(io, (uint8_t *)" !KEY_good! ", 12);
+    *--psp = (unsigned int)ch_read;
 }
 
 CODE(emit) {
@@ -581,35 +591,79 @@ CODE(emit) {
 
 CODE(keyq) {
     *--psp = getquery(); 
+    // *--psp = 1; // getquery();  /* TODO KLUDGE */
 }
 
 CODE(dot) {        /* temporary definition for testing */
-    printf(" %d", *psp++);
+    // printf(" %d", *psp++);
+    // print_this
+    itoacf();
 }
 
 CODE(dothh) {        /* temporary definition for testing */
-    printf(" %2x", *psp++);
+    // printf(" %2x", *psp++);
+    itoacf();
 }
 
 CODE(dothhhh) {        /* temporary definition for testing */
-    printf(" %8x", *psp++);
+    // printf(" %8x", *psp++);
+    itoacf();
 }
 
+/* KLUDGE TODO wa1tnr */
 CODE(dots) {    /* print stack, for testing */
     unsigned int *p;
     p = &pstack[PSTACKSIZE-2];      /* deepest element on stack */
-    printf("\n%8x:", (unsigned int)p);
-    while (p >= psp) printf(" %8x", *p--);
+
+    int len_pr_strn = 0; // ainsu
+    int popped = (uint32_t) p; // pop(); // ainsu DONT HAVE pop()
+
+    pr_strn[0] = (uint32_t) "\0";
+
+    input_intgr = popped; // itoa.h maybe
+
+    itoa(input_intgr, pr_strn);
+    len_pr_strn = strlen(pr_strn);
+    io_write(io, (uint8_t *)pr_strn, len_pr_strn);
+    _spc(); // print formatting/spacing
+
+    // printf("\n%8x:", (unsigned int)p);
+
+    while (p >= psp) { // printf(" %8x", *p--);
+        // popped = *p--;
+        input_intgr = *p--;
+        pr_strn[0] = (uint32_t) "\0";
+        itoa(input_intgr, pr_strn);
+        len_pr_strn = strlen(pr_strn);
+        io_write(io, (uint8_t *)pr_strn, len_pr_strn);
+        _spc(); // print formatting/spacing
+    }
 }
 
+/* KLUDGE TODO wa1tnr */
 CODE(dump) {   /* adr n -- */
+    int len_pr_strn = 0; // ainsu
     unsigned char *p;
     unsigned int n, i;
     n = *psp++;
     p = (unsigned char *)*psp++;
+    // int popped = (uint32_t) p;
     for (i=0; i<n; i++) {
-        if ((i&0xf)==0) printf("\n%8x:", (unsigned int)p);
-        printf(" %02x", *p++);
+        if ((i&0xf)==0) { // printf("\n%8x:", (unsigned int)p);
+            input_intgr = (uint32_t) p;
+            pr_strn[0] = (uint32_t) "\0";
+            itoa(input_intgr, pr_strn);
+            len_pr_strn = strlen(pr_strn);
+            io_write(io, (uint8_t *)pr_strn, len_pr_strn);
+            _spc(); // print formatting/spacing
+        }
+        // printf(" %02x", *p++);
+        input_intgr = *p++;
+        pr_strn[0] = (uint32_t) "\0";
+        itoa(input_intgr, pr_strn);
+        len_pr_strn = strlen(pr_strn);
+        io_write(io, (uint8_t *)pr_strn, len_pr_strn);
+        _spc(); // print formatting/spacing
     }
 }       
 
@@ -1223,6 +1277,9 @@ void interpreter(void)
     rsp = &rstack[RSTACKSIZE-1];
     ip = &Tcold;
     ip += CELL;
+
+    io_write(io, (uint8_t *)"DEBUG: INTERPRETER\r\n", 20);
+
     run = 1;                /* set to zero to terminate interpreter */
     while (run) {
         w = *(void **)ip;       /* fetch word address from thread */
@@ -1230,6 +1287,9 @@ void interpreter(void)
         x = *(void **)w;        /* fetch function adrs from word def */
         xt = (void (*)())x;     /* too much casting! */
         w += CELL;
+        io_write(io, (uint8_t *) "DEBUG: call function LINE 1290\r\n", 32);
+                               // 1234567 101234567 201234567 30123456789012345678901234567890
+
         (*xt)(w);               /* call function w/adrs of word def */
     }        
 }

@@ -28,4 +28,4 @@ extern void over(void);
 extern void dotsR(void);
 extern void bosDot(void);
 extern void dotS(void);
-extern void rstack(void);
+extern void ainsu_rstack(void);

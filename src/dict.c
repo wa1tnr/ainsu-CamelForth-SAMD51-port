@@ -26,6 +26,8 @@
 #include "programs.h"
 #include "asm_test.h"
 
+extern void camelforth(void);
+
 int linelen = LLENGTH; // = 28
 
 /* buffer required for strings read from flash */
@@ -108,8 +110,9 @@ const entry dictionary[] = {
     { _help,      help   },
     { _bosDot,    bosDot },
     { _prog_a,    prog_a },
-    { _rstack,    rstack },
+    { _ainsu_rstack,    ainsu_rstack },
     { _aart,      aart   },
+    { _camelforth,   camelforth },
     { _warm_,     _warm  },
     { _nop,       nop    }, // just switched these 28 Aug 23:10 UTC
 };
