@@ -581,7 +581,7 @@ CODE(key) {
     // *--psp = (unsigned int)getch();
     getKey();
     uint8_t ch_read = (uint32_t) ch[0];
-    io_write(io, (uint8_t *)" !KEY_good! ", 12);
+    // DEBUG: // io_write(io, (uint8_t *)" !KEY_good! ", 12);
     *--psp = (unsigned int)ch_read;
 }
 
@@ -1278,7 +1278,7 @@ void interpreter(void)
     ip = &Tcold;
     ip += CELL;
 
-    io_write(io, (uint8_t *)"DEBUG: INTERPRETER\r\n", 20);
+    // DEBUG: // io_write(io, (uint8_t *)"DEBUG: INTERPRETER\r\n", 20);
 
     run = 1;                /* set to zero to terminate interpreter */
     while (run) {
@@ -1287,9 +1287,7 @@ void interpreter(void)
         x = *(void **)w;        /* fetch function adrs from word def */
         xt = (void (*)())x;     /* too much casting! */
         w += CELL;
-        io_write(io, (uint8_t *) "DEBUG: call function LINE 1290\r\n", 32);
-                               // 1234567 101234567 201234567 30123456789012345678901234567890
-
+        // DEBUG: // io_write(io, (uint8_t *) "  ~~pip~~  ", 11);
         (*xt)(w);               /* call function w/adrs of word def */
     }        
 }

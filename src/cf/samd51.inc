@@ -128,6 +128,7 @@ void putch(char c) {
 
 int getquery(void) {
     // return(UARTCharsAvail(UART0_BASE) != 0);
+    int l_read_ln = 0;
     int not_found = 1;
     while(not_found) {
         queryKey(); // sets read_ln;
@@ -135,7 +136,9 @@ int getquery(void) {
     }
     // return(UARTCharsAvail(UART0_BASE) != 0);
     io_write(io, (uint8_t *)" !chars! ", 9);
-    return read_ln; // can be more than 1
+    l_read_ln = read_ln;
+    read_ln = 0;
+    return l_read_ln; // can be more than 1
 }
 
 /****f* main/main
