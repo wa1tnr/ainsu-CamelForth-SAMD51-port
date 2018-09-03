@@ -95,6 +95,28 @@ example calls  to   4798  blx r3:
    1205     4826:       4798            blx     r3
 
 
+   2981 void runword(void) {
+   2982     51f2:       b510            push    {r4, lr}
+
+   3007     520c:       6843            ldr     r3, [r0, #4]
+   3008     520e:       4798            blx     r3
+
+
+   3287 /* emit */
+   3288 void emit(void) {
+   3289     5394:       b507            push    {r0, r1, r2, lr}
+
+   3293     539a:       4b06            ldr     r3, [pc, #24]   ; (53b4 <emit+0x20>)
+   3294     539c:       4798            blx     r3
+
+   3300     53aa:       4b04            ldr     r3, [pc, #16]   ; (53bc <emit+0x28>)
+   3301     53ac:       4798            blx     r3
+   3302 }
+   3303     53ae:       b003            add     sp, #12
+   3304     53b0:       f85d fb04       ldr.w   pc, [sp], #4
+   3305     53b4:       00004df9        .word   0x00004df9
+   3306     53b8:       20000240        .word   0x20000240
+   3307     53bc:       000042a5        .word   0x000042a5
 
 
 
