@@ -190,8 +190,21 @@ void camelforth(void)
     // ------------- END OF ADAPTED TI INITIALIZATION CODE -------------
 
     while (1) {     /* loop in case interpreter() ever terminates */
+
         // UARTprintf("\nCamelForth in C - Tiva-C testing\n");
+
+        // print_this("\n\n(leaving ainsuForth MTX)\n\n\n", 29);
+        print_this("\n\n", 2);
+        fg_white();
+        bg_blue();
+        print_this("(leaving ainsuForth MTX)", 24);
+        bg_black();
+        print_this("\n\n\n", 3);
+        fg_yellow();
+
+                   // 1234567 101234567 201234567 301234567 40
         print_this("\nCamelForth in C - SAMD51 testing\n", 34);
+
         interpreter();
     }
 }

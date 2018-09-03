@@ -7,6 +7,12 @@
 
 extern struct io_descriptor *io;
 
+extern void fg_white();
+extern void fg_yellow();
+extern void bg_black();
+extern void bg_blue();
+extern void bg_red();
+extern void color_reset();
 extern void _que(void);
 extern void _ok(void);
 extern void _bkbar(void); // broken bar
