@@ -30,15 +30,18 @@ Most recent work is here.  SAMD21 repository is lagging behind quite a bit.
 
 # Intent
 
-This is a working, USART-tethered interpreter that exhibits a very small
-number of behaviors reminiscent of forth.
+ainsuForth (without CamelForth added) is a working, USART-
+tethered interpreter that exhibits a very small number of
+behaviors reminiscent of forth.
 
-It can execute arbitrary functions coded in C, through a pleasant tty
-(typewriter-like) interface at 38400 bps.
+It can execute arbitrary functions coded in C, through a
+pleasant tty (typewriter-like) interface at 38400 bps.
 
-Intent is to use this primitive environment as a way 'in' .. as a debug
-monitor running on the hardware itself -- to try to do something a bit
-more interesting there.
+Intent is to use this primitive environment as a way 'in' ..
+as a debug monitor running on the hardware itself -- to try
+to do something a bit more interesting there.
+
+(LATER: CamelForth was added - that is truly interesting!)
 
 # Build Environment
 
