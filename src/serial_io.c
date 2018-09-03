@@ -1,3 +1,6 @@
+// Mon Sep  3 16:28:39 UTC 2018
+// On branch camel_forth_e_00a-fa-
+
 // Mon Sep  3 05:17:29 UTC 2018
 // On branch camel_forth_e_00a-
 
@@ -25,11 +28,11 @@
 #include "dict_common.h"
 
 #define timeStamp(t,l) \
-    "Mon Sep  3 05:17:29 UTC 2018\r\n\r\n", 32
+    "Mon Sep  3 16:28:39 UTC 2018\r\n\r\n", 32
 
 // current target branch:
 #define branchStamp(b,l) \
-    "On branch camel_forth_e_00a-   ", 31
+    "On branch camel_forth_e_00a-fa-", 31
 
 // "zKM_converser_d51-aa- +CamelForth +asm   ", 41
 // 1234567 101234567 201234567 301234567 4012345678901234567890
