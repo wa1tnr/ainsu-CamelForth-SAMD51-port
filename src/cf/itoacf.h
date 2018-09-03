@@ -6,3 +6,5 @@
 
 extern unsigned int *psp;
 extern void itoacf(void);
+extern void itoacfp(void);
+extern int pop(void);
