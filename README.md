@@ -1,5 +1,21 @@
 # ainsuMtxd51
 
+# NEWS
+
+CamelForth is now embedded into this forth-like interpreter!
+
+  'forth' starts CamelForth.  Please use ALL CAPS when
+addressing CamelForth.
+
+  There is no exit (just reboot to get out of CamelForth).
+
+http://camelforth.com/news.php
+
+CamelForth in C!
+Misc: Brad R @ Friday 15 December 2017 - 14:38:49
+
+# Status
+
 Working small, Forth-like interpreter (type 'words' for help).
 
     On branch KM_converser_d51
