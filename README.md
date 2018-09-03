@@ -1,4 +1,8 @@
-# ainsuMtxd51
+# ainsuCFxd51-a
+
+  git remote add origin https://github.com/wa1tnr/ainsuForth-CF-samd51-forth.git 
+
+(from ainsuMtxd51)
 
 # NEWS
 
