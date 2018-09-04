@@ -1,20 +1,3 @@
-// Mon Sep  3 16:42:24 UTC 2018
-// On branch camel_forth_e_00a-fa-
-
-// Mon Sep  3 05:17:29 UTC 2018
-// On branch camel_forth_e_00a-
-
-/* wa1tnr - September, 2018 LGPL v2.1 */
-
-// Mon Sep  3 04:16:52 UTC 2018
-// On branch camel_forth_e_00a-
-
-// Sun Sep  2 20:17:50 UTC 2018
-// On branch zKM_converser_d51-aa-
-
-// Wed Aug 29 05:03:11 UTC 2018
-// On branch xKM_converser_d51-nn-
-
 #include "serial_io.h"
 #include "driver_init.h"
 #include "common.h"
@@ -29,20 +12,6 @@
 
 #define timeStamp(t,l) \
     "Mon Sep  3 16:42:24 UTC 2018\r\n\r\n", 32
-
-/*
-#define branchStamp(b,l) \
-    "On branch camel_forth_e_00a-fa-    ", 35
-*/
-
-// "zKM_converser_d51-aa- +CamelForth +asm   ", 41
-// 1234567 101234567 201234567 301234567 4012345678901234567890
-
-/*
-#define branchStamp(b,l) "KM_converser_d51         ", 25
-*/
-
-// current target branch:
 #define branchStamp(b,l) "master    +CamelForth    ", 25
 
 struct io_descriptor *io;
@@ -56,43 +25,21 @@ void usart_sync_enbl(void) {
 }
 
 void bg_black(void)   { // background black
-    io_write(io, (uint8_t *)"\033\133", 2); // ESC [
-    io_write(io, (uint8_t *)"\064\060", 2); // 40 - blue black
-    io_write(io, (uint8_t *)"m", 1);        // for the stanza
 }
 
 void bg_red(void)    { // background red
-    io_write(io, (uint8_t *)"\033\133", 2); // ESC [
-    io_write(io, (uint8_t *)"\064\061", 2); // 41 - red bg
-    io_write(io, (uint8_t *)"m", 1);        // for the stanza
 }
 
 void bg_blue(void)   { // background blue
-    io_write(io, (uint8_t *)"\033\133", 2); // ESC [
-    io_write(io, (uint8_t *)"\064\064", 2); // 44 - blue bg
-    io_write(io, (uint8_t *)"m", 1);        // for the stanza
 }
 
 void color_reset(void) {  // reset color
-    io_write(io, (uint8_t *)"\033\133", 2); // ESC [
-    io_write(io, (uint8_t *)"\060", 1);     // 0
-    io_write(io, (uint8_t *)"m", 1);        // for the stanza
 }
 
 void fg_white(void) {
-    io_write(io, (uint8_t *)"\033\133", 2); // ESC [
-    io_write(io, (uint8_t *)"\060", 1);     // 0
-    io_write(io, (uint8_t *)"\073", 1);     // ;  semicolon
-    io_write(io, (uint8_t *)"\061", 1);     // 1
-    io_write(io, (uint8_t *)"\073", 1);     // ;  semicolon
-    io_write(io, (uint8_t *)"\063\067", 2); // 37 - white  fg
-    io_write(io, (uint8_t *)"m", 1);        // for the stanza
 }
 
 void fg_yellow(void) { // foreground yellow
-    io_write(io, (uint8_t *)"\033\133", 2); // ESC [
-    io_write(io, (uint8_t *)"\063\063", 2); // 33 - yellow fg
-    io_write(io, (uint8_t *)"m", 1);        // for the stanza
 }
 
 /**

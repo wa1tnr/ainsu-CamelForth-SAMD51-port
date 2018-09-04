@@ -7,5 +7,5 @@
 
 /* emit */
 void emit(void) {
-    u_emit();
+//  u_emit();
 }
