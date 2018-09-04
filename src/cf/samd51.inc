@@ -120,10 +120,26 @@ void ConfigureUART(uint32_t clockfreq)
 // #define getch UARTgetc
 #define getch getKey
 
+char cfcfc;
+
+void ucf_emit(void) {
+    uint32_t  rbyte = 0;
+    int       char_r   =  '0';
+    char      *cbyte;
+    // rbyte = pop();
+    rbyte = cfcfc;
+
+    cbyte = (char*) &rbyte;
+    int df = (uint32_t) cbyte;
+    char *dfbyte = (char*) df;
+    char_r = (int)dfbyte;
+    io_write(io, (uint8_t *) char_r, 1);
+    // io_write(io, (uint8_t *)"  ~EMIT~  ", 10);
+}
+
 void putch(char c) {
-    push(c); emit();
-    // UARTwrite(&c, 1);        
-    // io_write(io, (uint8_t *)&c, 1);
+    cfcfc = c;
+    ucf_emit();
 }
 
 int getquery(void) {
@@ -189,7 +205,7 @@ void camelforth(void)
     
     // ------------- END OF ADAPTED TI INITIALIZATION CODE -------------
 
-    while (1) {     /* loop in case interpreter() ever terminates */
+ // while (1) {     /* loop in case interpreter() ever terminates */
 
         // UARTprintf("\nCamelForth in C - Tiva-C testing\n");
 
@@ -205,6 +221,14 @@ void camelforth(void)
                    // 1234567 101234567 201234567 301234567 40
         print_this("\nCamelForth in C - SAMD51 testing\n", 34);
 
+   // ------------------
         interpreter();
-    }
+   // ------------------
+
+        bg_red(); fg_white();
+
+        print_this("(entering ainsuForth MTX)", 25);
+
+        bg_black(); fg_yellow();
+ // }
 }
