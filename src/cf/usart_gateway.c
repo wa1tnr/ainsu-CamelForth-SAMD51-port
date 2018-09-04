@@ -1,10 +1,13 @@
+// Tue Sep  4 09:08:22 UTC 2018
+// On branch camel_forth_to_stand_alone
+
+/* wa1tnr - September, 2018 LGPL v2.1 */
+
 // Mon Sep  3 16:42:24 UTC 2018
 // On branch camel_forth_e_00a-fa-
 
 // Mon Sep  3 05:17:29 UTC 2018
 // On branch camel_forth_e_00a-
-
-/* wa1tnr - September, 2018 LGPL v2.1 */
 
 // Mon Sep  3 04:16:52 UTC 2018
 // On branch camel_forth_e_00a-
@@ -15,7 +18,7 @@
 // Wed Aug 29 05:03:11 UTC 2018
 // On branch xKM_converser_d51-nn-
 
-#include "serial_io.h"
+// #include "serial_io.h"
 #include "driver_init.h"
 #include "common.h"
 #include "getKey.h"
@@ -28,11 +31,19 @@
 #include "dict_common.h"
 
 #define timeStamp(t,l) \
-    "Mon Sep  3 16:42:24 UTC 2018\r\n\r\n", 32
+    "Tue Sep  4 09:08:22 UTC 2018\r\n\r\n", 32
 
+// current target branch:
+#define branchStamp(b,l) \
+    "On branch camel_forth_to_stand_alone    ", 40
 /*
 #define branchStamp(b,l) \
     "On branch camel_forth_e_00a-fa-    ", 35
+
+    "On branch camel_forth_to_stand_alone    ", 40
+
+  // 1234567 101234567 201234567 301234567 4012345678901234567890
+
 */
 
 // "zKM_converser_d51-aa- +CamelForth +asm   ", 41
@@ -42,8 +53,9 @@
 #define branchStamp(b,l) "KM_converser_d51         ", 25
 */
 
-// current target branch:
+/*
 #define branchStamp(b,l) "master    +CamelForth    ", 25
+*/
 
 struct io_descriptor *io;
 
@@ -101,6 +113,10 @@ void fg_yellow(void) { // foreground yellow
 
 uint8_t *buf;
 
+void _spc(void) {
+    io_write(io, (uint8_t *) " ",         1);
+}
+
 void _que(void) {
     io_write(io, (uint8_t *) "? ",         1);
     _spc();
@@ -149,10 +165,6 @@ void filter(void) {
 
 void _bkbar(void) {
     io_write(io, (uint8_t *) "|",         1);
-}
-
-void _spc(void) {
-    io_write(io, (uint8_t *) " ",         1);
 }
 
 void _cr(void) {
