@@ -614,23 +614,17 @@ CODE(dothhhh) {        /* temporary definition for testing */
 CODE(dots) {    /* print stack, for testing */
     unsigned int *p;
     p = &pstack[PSTACKSIZE-2];      /* deepest element on stack */
-
-    int len_pr_strn = 0; // ainsu
+    int len_pr_strn = 0;
     int p_pped = (uint32_t) p;
-
     pr_strn[0] = (uint32_t) "\0";
-
-    input_intgr = p_pped; // itoa.h maybe
-
+    input_intgr = p_pped;
     itoa(input_intgr, pr_strn);
     len_pr_strn = strlen(pr_strn);
     io_write(io, (uint8_t *)pr_strn, len_pr_strn);
     _spc(); // print formatting/spacing
-
     // printf("\n%8x:", (unsigned int)p);
 
     while (p >= psp) { // printf(" %8x", *p--);
-        // p_pped = *p--;
         input_intgr = *p--;
         pr_strn[0] = (uint32_t) "\0";
         itoa(input_intgr, pr_strn);
@@ -642,20 +636,20 @@ CODE(dots) {    /* print stack, for testing */
 
 /* KLUDGE TODO wa1tnr */
 CODE(dump) {   /* adr n -- */
-    int len_pr_strn = 0; // ainsu
+    int len_pr_strn = 0;
     unsigned char *p;
     unsigned int n, i;
     n = *psp++;
     p = (unsigned char *)*psp++;
-    // int p_pped = (uint32_t) p;
     for (i=0; i<n; i++) {
         if ((i&0xf)==0) { // printf("\n%8x:", (unsigned int)p);
+            _cr();
             input_intgr = (uint32_t) p;
             pr_strn[0] = (uint32_t) "\0";
             itoa(input_intgr, pr_strn);
             len_pr_strn = strlen(pr_strn);
             io_write(io, (uint8_t *)pr_strn, len_pr_strn);
-            _spc(); // print formatting/spacing
+            _spc();
         }
         // printf(" %02x", *p++);
         input_intgr = *p++;
@@ -663,7 +657,7 @@ CODE(dump) {   /* adr n -- */
         itoa(input_intgr, pr_strn);
         len_pr_strn = strlen(pr_strn);
         io_write(io, (uint8_t *)pr_strn, len_pr_strn);
-        _spc(); // print formatting/spacing
+        _spc();
     }
 }       
 
