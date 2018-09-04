@@ -79,7 +79,6 @@ src/dump.o \
 src/nyb_stack.o \
 src/getKey.o \
 src/readword.o \
-src/serial_io.o \
 src/warm.o \
 src/clock_gen_OE.o \
 src/stack_ops.o \
@@ -93,7 +92,10 @@ src/programs.o \
 src/asm_test.o \
 src/cf/forth.o \
 src/cf/itoacf.o \
+src/cf/usart_gateway.o \
 main.o
+
+# src/serial_io.o \
 
 OBJS_AS_ARGS +=  \
 "hal/src/hal_io.o" \
@@ -127,7 +129,6 @@ OBJS_AS_ARGS +=  \
 "src/nyb_stack.o" \
 "src/getKey.o" \
 "src/readword.o" \
-"src/serial_io.o" \
 "src/warm.o" \
 "src/clock_gen_OE.o" \
 "src/stack_ops.o" \
@@ -141,7 +142,10 @@ OBJS_AS_ARGS +=  \
 "src/asm_test.o" \
 "src/cf/forth.o" \
 "src/cf/itoacf.o" \
+"src/cf/usart_gateway.o" \
 "main.o"
+
+# "src/serial_io.o" \
 
 # List the dependency files
 DEPS := $(OBJS:%.o=%.d)
@@ -178,7 +182,6 @@ DEPS_AS_ARGS +=  \
 "src/nyb_stack.d" \
 "src/getKey.d" \
 "src/readword.d" \
-"src/serial_io.d" \
 "src/warm.d" \
 "src/clock_gen_OE.d" \
 "src/stack_ops.d" \
@@ -192,7 +195,10 @@ DEPS_AS_ARGS +=  \
 "src/asm_test.d" \
 "src/cf/forth.d" \
 "src/cf/itoacf.d" \
+"src/cf/usart_gateway.d" \
 "main.d"
+
+# "src/serial_io.d" \
 
 OUTPUT_FILE_NAME :=AtmelStart
 QUOTE := "
