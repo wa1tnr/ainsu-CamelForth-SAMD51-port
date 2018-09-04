@@ -93,6 +93,7 @@ src/asm_test.o \
 src/cf/forth.o \
 src/cf/itoacf.o \
 src/cf/usart_gateway.o \
+src/cf/cmf_itoa.o \
 main.o
 
 # src/serial_io.o \
@@ -143,6 +144,7 @@ OBJS_AS_ARGS +=  \
 "src/cf/forth.o" \
 "src/cf/itoacf.o" \
 "src/cf/usart_gateway.o" \
+"src/cf/cmf_itoa.o" \
 "main.o"
 
 # "src/serial_io.o" \
@@ -196,6 +198,7 @@ DEPS_AS_ARGS +=  \
 "src/cf/forth.d" \
 "src/cf/itoacf.d" \
 "src/cf/usart_gateway.d" \
+"src/cf/cmf_itoa.d" \
 "main.d"
 
 # "src/serial_io.d" \
