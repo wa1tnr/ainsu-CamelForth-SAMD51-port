@@ -2,7 +2,7 @@
 // On branch xKM_converser_d51-nn-
 
 #include <atmel_start.h>
-#include "serial_io.h"
+// #include "serial_io.h"
 #include "pins.h"
 #include "dump.h"
 #include "nyb_stack.h"
@@ -10,6 +10,7 @@
 #include "common.h"
 #include "itoa.h"
 #include "stack_ops.h"
+#include "usart_gateway.h"
 #include "forth.h"
 
 // previous:
@@ -63,7 +64,9 @@ int main(void)
 
     clock_gen_oe(); // clock generator 0 output enable
 
-    USART_0_example_upper(); // initialize
+    // USART_0_example_upper(); // initialize
+
+    USART_0_example_upper_camelforth(); // atmel start USART driver
 
     // rram = srdump();
 
