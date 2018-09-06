@@ -11,13 +11,16 @@
 */
 
 #include <atmel_start.h>
-#include "common.h"
+// #include "common.h"
+#include "ainsu_common.h"
 #define maxtib 16
 #define stackbufferlen 64
 extern uint8_t *buf;
 #include "serial_io.h"
 #include <string.h>
-char pr_strn[stackbuflen];
+// char pr_strn[stackbuflen];
+char pr_strn[stackbufferlen];
+
 int input_integer = 0;
 
 /* reverse:  reverse string s in place */
