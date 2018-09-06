@@ -1,7 +1,7 @@
 // Thu Aug 30 03:59:24 UTC 2018
 // On branch xKM_converser_d51-pp-
 
-#include "common.h"
+// #include "common.h"
 // #include "getKey.h"
 // #include "driver_examples.h"
 #include "serial_io.h"
@@ -11,7 +11,7 @@
 
 int crlfstate = 0; // differentiate when ascii 13 is entered to the terminal
 
-uint8_t pos = 0;
+// uint8_t pos = 0;
 
 /* Is the word in tib a number? */
 int isNumber() {
@@ -48,7 +48,7 @@ void printing(void) {
 
 void throw_(void) { }
 
-uint8_t reading(void) {
+// uint8_t reading(void) {
 /*
     // getKey();
     // printing();
@@ -76,14 +76,14 @@ uint8_t reading(void) {
         tib[pos] = 0; // terminate
     }
 
-*/
     return 1; // ain't done yett..
-}
+*/
+// }
 
 void readword(void) {
     // pos = 0;
     // tib[0] = 0;
-    while (reading());
+    // while (reading());
 }
 
 /*
