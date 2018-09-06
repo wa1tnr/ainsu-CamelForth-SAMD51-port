@@ -599,48 +599,55 @@ CODE(keyq) {
 CODE(dot) {        /* temporary definition for testing */
     // printf(" %d", *psp++);
     // print_this
-    itoacf();
+    // itoacf();
+    itoa_write();
 }
 
 CODE(dothh) {        /* temporary definition for testing */
     // printf(" %2x", *psp++);
-    itoacf();
+    // itoacf();
+    itoa_write();
 }
 
 CODE(dothhhh) {        /* temporary definition for testing */
     // printf(" %8x", *psp++);
-    itoacf();
+    // itoacf();
+    itoa_write();
 }
+
+
+
+
 
 /* KLUDGE TODO wa1tnr */
 CODE(dots) {    /* print stack, for testing */
-
     unsigned int *p;
     p = &pstack[PSTACKSIZE-2];      // deepest element on stack //
     int len_pr_strn = 0;
     int p_pped = (uint32_t) p;
-    pr_strn[0] = (uint32_t) "\0";
+//  pr_strn[0] = (uint32_t) "\0";
+//  extern char print_string[stack_buffer_length];
+    print_string[0] = (uint32_t) "\0";
     // input_intgr = p_pped;
     input_integer = p_pped;
-
-    // cmf_itoa(input_intgr, pr_strn); // THIS IS the Arduino LLC code - the vars need renaming
-    cmf_itoa(input_integer, pr_strn); // THIS IS the Arduino LLC code - the vars need renaming
-
-    len_pr_strn = strlen(pr_strn);
-    io_write(io, (uint8_t *)pr_strn, len_pr_strn);
+    // cmf_itoa(input_intgr, pr_strn); // Arduino LLC code
+    cmf_itoa(input_integer, print_string); // Arduino LLC code
+    len_pr_strn = strlen(print_string);
+    io_write(io, (uint8_t *)print_string, len_pr_strn);
     _spc(); // print formatting/spacing
     // printf("\n%8x:", (unsigned int)p);
-
     while (p >= psp) { // printf(" %8x", *p--);
-
         // input_intgr = *p--;
         input_integer  = *p--;
+        // pr_strn[0] = (uint32_t) "\0";
+        print_string[0] = (uint32_t) "\0";
 
-        pr_strn[0] = (uint32_t) "\0";
         // cmf_itoa(input_intgr, pr_strn); // Arduino LLC code
-        cmf_itoa(input_integer, pr_strn); // Arduino LLC code
-        len_pr_strn = strlen(pr_strn);
-        io_write(io, (uint8_t *)pr_strn, len_pr_strn);
+
+        cmf_itoa(input_integer, print_string); // Arduino LLC code
+
+        len_pr_strn = strlen(print_string);
+        io_write(io, (uint8_t *) print_string, len_pr_strn);
         _spc(); // print formatting/spacing
     }
 
