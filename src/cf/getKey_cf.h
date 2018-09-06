@@ -6,6 +6,6 @@
 
 extern char ch[];
 extern int read_ln;
-extern char tib[maxtib]; /* Terminal Input Buffer for interpreter */
+// extern char tib[maxtib]; /* Terminal Input Buffer for interpreter */
 extern void getKey(void); // hardware-independent wrapper
 extern void queryKey(void);
