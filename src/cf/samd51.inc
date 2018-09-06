@@ -47,10 +47,11 @@
 
 // extern struct io_descriptor *io;
 #include "serial_io.h"  // io_write's  'io'
-#include "common.h"     // ainsu: maxtib
+// #include "common.h"     // ainsu: maxtib
 #include "stack_ops.h"  // ainsu push(int p)
 #include "emit.h"       // ainsu emit
-#include "getKey.h"     // ainsu
+// #include "getKey.h"     // ainsu
+#include "getKey_cf.h"  // REQUIRED Atmel SAMD51 port, for now (06 SEP 2018)
 
 // #define NULL 0  // already defined for Atmel Start and gcc:
 
@@ -209,13 +210,11 @@ void camelforth(void)
 
         // UARTprintf("\nCamelForth in C - Tiva-C testing\n");
 
-        // print_this("\n\n(leaving ainsuForth MTX)\n\n\n", 29);
-        print_this("\n\n", 2);
         fg_white();
         bg_blue();
         print_this("(leaving ainsuForth MTX)", 24);
         bg_black();
-        print_this("\n\n\n", 3);
+        print_this("\n", 1);
         fg_yellow();
 
                    // 1234567 101234567 201234567 301234567 40
