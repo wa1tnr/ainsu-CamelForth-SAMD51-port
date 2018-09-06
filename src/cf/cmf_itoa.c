@@ -19,8 +19,8 @@ extern uint8_t *buf;
 #include "serial_io.h"
 #include <string.h>
 // char pr_strn[stackbuflen];
-char pr_strn[stackbufferlen];
-
+// char pr_strn[stackbufferlen];
+char print_string[stack_buffer_length];
 int input_integer = 0;
 
 /* reverse:  reverse string s in place */
