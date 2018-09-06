@@ -3,4 +3,4 @@
 /* wa1tnr, Connecticut USA */
 /* LICENSE: LGPL v2.1 */
 
-extern uint8_t*  cdump(void);
+// extern uint8_t*  cdump(void);
