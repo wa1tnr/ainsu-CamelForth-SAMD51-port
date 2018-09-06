@@ -29,6 +29,10 @@
 
 #define PA16 GPIO(GPIO_PORTA, 16)
 #define PA19 GPIO(GPIO_PORTA, 19)
+// UART on Metro M4 Express PA22 PA23
+// driver_init.c
+//     gpio_set_pin_function(PA22, PINMUX_PA22C_SERCOM3_PAD0); // TX
+//     gpio_set_pin_function(PA23, PINMUX_PA23C_SERCOM3_PAD1); // RX
 #define PA22 GPIO(GPIO_PORTA, 22)
 #define PA23 GPIO(GPIO_PORTA, 23)
 #define PB14 GPIO(GPIO_PORTB, 14)
