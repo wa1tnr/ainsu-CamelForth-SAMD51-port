@@ -12,10 +12,12 @@
 #include "usart_gateway.h"
 #include "forth.h"
 
+/*
 void delays(void) { // delay some
     for (volatile int i=(3*21040); i>0; i--) {
     }
 }
+*/
 
 /*
 void blink_two(void) {
@@ -27,11 +29,13 @@ void blink_two(void) {
 }
 */
 
+/*
 void ldelays(void) {
     for (int ie=7; ie >0; ie--) {
         delays();
     }
 }
+*/
 
 void blink_awhile(void) {
 
