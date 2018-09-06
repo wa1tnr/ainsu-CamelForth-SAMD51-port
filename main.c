@@ -37,20 +37,22 @@ void ldelays(void) {
 }
 */
 
+/*
 void blink_awhile(void) {
 
     for (int iter=5; iter >0; iter--) {
-/*
+
         blink_two();
-*/
+
     }
 }
+*/
 
 int main(void)
 {
     // rram, q, i
-    uint8_t* rram = 0;
-    int q = 0;
+    // uint8_t* rram = 0;
+    // int q = 0;
 
 
     int xec =  0; // false - no,  do not exec
@@ -70,24 +72,24 @@ int main(void)
 #define LOCAL_AINSU_OFFSET 8304 // 8304  $2070
 
     if (xec != 0) {
-        push(LOCAL_AINSU_OFFSET);
+        // push(LOCAL_AINSU_OFFSET);
 
 
 
         for (int jk =   0x7; jk > 0; jk--) { // 7 lines
-            rram = cdump(); // dump.c
-            push(((uint32_t)rram) + 16); // address of the most recent line dumped
+            // rram = cdump(); // dump.c
+            // push(((uint32_t)rram) + 16); // address of the most recent line dumped
         }
 
-        q = (int)rram;
-        if (q > 2)  q = 2;
-        if (q < 1)  q = 2;
-        for (volatile int i=-1; i<q; i++) {
+        // q = (int)rram;
+        // if (q > 2)  q = 2;
+        // if (q < 1)  q = 2;
+        // for (volatile int i=-1; i<q; i++) {
 /*
             blink_two();
 */
 
-        }
+        // }
 
     } // fi xec
 
