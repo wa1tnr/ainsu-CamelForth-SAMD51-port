@@ -2,7 +2,7 @@
 // On branch xKM_converser_d51-pp-
 
 #include "common.h"
-#include "getKey.h"
+// #include "getKey.h"
 // #include "driver_examples.h"
 #include "serial_io.h"
 
@@ -15,22 +15,24 @@ uint8_t pos = 0;
 
 /* Is the word in tib a number? */
 int isNumber() {
-    char *endptr;
-    strtol(tib, &endptr, 0);
-    if (endptr == tib) return 0;
-    if (*endptr != '\0') return 0;
+    // char *endptr;
+    // strtol(tib, &endptr, 0);
+    // if (endptr == tib) return 0;
+    // if (*endptr != '\0') return 0;
     return 1;
 }
 
 /* Convert number in tib */
 int number() {
-  char *endptr;
-  return (int) strtol(tib, &endptr, 0);
+  // char *endptr;
+  // return (int) strtol(tib, &endptr, 0);
+  return 1; // totally not a real return - is to neuter the code!
 }
 
 void printing(void) {
-    uint8_t ch_read = (uint32_t) ch[0];
+    // uint8_t ch_read = (uint32_t) ch[0];
 
+/*
     if (ch_read == 13) {
         crlfstate = -1; // raise crlfstate TRUE
         _spc(); // do not print a cr here!
@@ -41,13 +43,15 @@ void printing(void) {
             _spc(); // wrong comment: may need echo on some terminals TODO
         }
     }
+*/
 }
 
 void throw_(void) { }
 
 uint8_t reading(void) {
-    getKey();
-    printing();
+/*
+    // getKey();
+    // printing();
     uint8_t ch_read = (uint32_t) ch[0];
     if (ch_read == '\n') {
         _cr();
@@ -62,20 +66,23 @@ uint8_t reading(void) {
         _spc();
         io_write(io, (uint8_t *) "\010", 1);
         if (pos == 0) { return 1; } // throw_(); //  SOLVED
-        tib[pos--] = 0;
-        tib[pos] = 0;
+        // tib[pos--] = 0;
+        // tib[pos] = 0;
         return 1; // return 1: make the 'while (reading())' last a while longer!
     }
+
     if (pos < maxtib) {
         tib[pos++] = ch_read; // append
         tib[pos] = 0; // terminate
     }
+
+*/
     return 1; // ain't done yett..
 }
 
 void readword(void) {
-    pos = 0;
-    tib[0] = 0;
+    // pos = 0;
+    // tib[0] = 0;
     while (reading());
 }
 
