@@ -55,7 +55,7 @@ int main(void)
     // int q = 0;
 
 
-    int xec =  0; // false - no,  do not exec
+    // int xec =  0; // false - no,  do not exec
 
     /* Initializes MCU, drivers and middleware */
     atmel_start_init();
@@ -71,15 +71,15 @@ int main(void)
 
 #define LOCAL_AINSU_OFFSET 8304 // 8304  $2070
 
-    if (xec != 0) {
+    // if (xec != 0) {
         // push(LOCAL_AINSU_OFFSET);
 
 
 
-        for (int jk =   0x7; jk > 0; jk--) { // 7 lines
+        // for (int jk =   0x7; jk > 0; jk--) { // 7 lines
             // rram = cdump(); // dump.c
             // push(((uint32_t)rram) + 16); // address of the most recent line dumped
-        }
+        // }
 
         // q = (int)rram;
         // if (q > 2)  q = 2;
@@ -91,17 +91,17 @@ int main(void)
 
         // }
 
-    } // fi xec
+    // } // fi xec
 
     /* Replace with your application code */
 
 
-    _cr(); // examples/driver_examples.c
+    // _cr(); // examples/driver_examples.c
 
 
     USART_0_example_lower();
 
     while (1) {
-        toggle_d11();
+        // toggle_d11();
     }
 }
