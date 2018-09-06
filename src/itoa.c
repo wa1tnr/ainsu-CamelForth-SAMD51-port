@@ -11,11 +11,11 @@
 */
 
 #include <atmel_start.h>
-#include "common.h"
+// #include "common.h"
 #include "serial_io.h"
 #include <string.h>
 
-char pr_strn[stackbuflen];
+// char pr_strn[stackbuflen];
 
 // print string - weak naming.  review. TODO wa1tnr
 int input_intgr = 0; // input integer - also a weak name. ;)  TODO wa1tnr
@@ -55,6 +55,7 @@ void itoa(int n, char s[]) {
 }
 
 void call_me_now_ms_cleo(void) { // call me now for your free reading
+/*
     prelude_to_cleo(); // test basic io_write() functionality
 
     pr_strn[0] = (uint32_t) "\0";
@@ -65,6 +66,7 @@ void call_me_now_ms_cleo(void) { // call me now for your free reading
 
     // pr_strn is populated now.
     io_write(io, (uint8_t *)pr_strn, 4);
+*/
 }
 
 /*
