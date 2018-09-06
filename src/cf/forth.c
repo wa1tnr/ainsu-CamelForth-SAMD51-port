@@ -43,8 +43,10 @@
 #include <stdbool.h>
 #include <string.h>
 #include "forth.h"
-#include "common.h" // ainsu
-#include "itoa.h"   // ainsu
+// #include "common.h" // ainsu
+#include "ainsu_common.h" // ainsu
+// #include "itoa.h"   // ainsu's Arduino LLC code
+#include "cmf_itoa.h" // CamelForth - Arduino LLC code
 #include "itoacf.h" // ainsu
 
 /*
@@ -612,30 +614,41 @@ CODE(dothhhh) {        /* temporary definition for testing */
 
 /* KLUDGE TODO wa1tnr */
 CODE(dots) {    /* print stack, for testing */
+
     unsigned int *p;
-    p = &pstack[PSTACKSIZE-2];      /* deepest element on stack */
+    p = &pstack[PSTACKSIZE-2];      // deepest element on stack //
     int len_pr_strn = 0;
     int p_pped = (uint32_t) p;
     pr_strn[0] = (uint32_t) "\0";
-    input_intgr = p_pped;
-    itoa(input_intgr, pr_strn);
+    // input_intgr = p_pped;
+    input_integer = p_pped;
+
+    // cmf_itoa(input_intgr, pr_strn); // THIS IS the Arduino LLC code - the vars need renaming
+    cmf_itoa(input_integer, pr_strn); // THIS IS the Arduino LLC code - the vars need renaming
+
     len_pr_strn = strlen(pr_strn);
     io_write(io, (uint8_t *)pr_strn, len_pr_strn);
     _spc(); // print formatting/spacing
     // printf("\n%8x:", (unsigned int)p);
 
     while (p >= psp) { // printf(" %8x", *p--);
-        input_intgr = *p--;
+
+        // input_intgr = *p--;
+        input_integer  = *p--;
+
         pr_strn[0] = (uint32_t) "\0";
-        itoa(input_intgr, pr_strn);
+        // cmf_itoa(input_intgr, pr_strn); // Arduino LLC code
+        cmf_itoa(input_integer, pr_strn); // Arduino LLC code
         len_pr_strn = strlen(pr_strn);
         io_write(io, (uint8_t *)pr_strn, len_pr_strn);
         _spc(); // print formatting/spacing
     }
+
 }
 
 /* KLUDGE TODO wa1tnr */
 CODE(dump) {   /* adr n -- */
+/*
     int len_pr_strn = 0;
     unsigned char *p;
     unsigned int n, i;
@@ -646,7 +659,7 @@ CODE(dump) {   /* adr n -- */
             _cr();
             input_intgr = (uint32_t) p;
             pr_strn[0] = (uint32_t) "\0";
-            itoa(input_intgr, pr_strn);
+            cmf_itoa(input_intgr, pr_strn); // Arduino LLC code
             len_pr_strn = strlen(pr_strn);
             io_write(io, (uint8_t *)pr_strn, len_pr_strn);
             _spc();
@@ -654,11 +667,12 @@ CODE(dump) {   /* adr n -- */
         // printf(" %02x", *p++);
         input_intgr = *p++;
         pr_strn[0] = (uint32_t) "\0";
-        itoa(input_intgr, pr_strn);
+        cmf_itoa(input_intgr, pr_strn); // Arduino LLC code
         len_pr_strn = strlen(pr_strn);
         io_write(io, (uint8_t *)pr_strn, len_pr_strn);
         _spc();
     }
+*/
 }       
 
 CODE(bye) {
