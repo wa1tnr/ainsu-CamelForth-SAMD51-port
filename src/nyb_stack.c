@@ -1,4 +1,5 @@
 /* nyb_stack.c */
+/*
 #include "serial_io.h"
 #include "common.h"
 #include <string.h>
@@ -13,3 +14,4 @@ uint8_t* ndump(void) { // nybble dump
     uint32_t test_byte = 0xc0ffeeca; // sample int to place into ram 
     return (uint8_t *)test_byte;
 }
+*/
