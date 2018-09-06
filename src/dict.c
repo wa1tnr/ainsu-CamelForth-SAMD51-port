@@ -13,7 +13,7 @@
 #include "dict.h"
 #include <string.h>
 #include "common.h"
-#include "getKey.h"
+// #include "getKey.h"
 #include "serial_io.h"
 #include "stack_ops.h"
 #include "math.h"
@@ -31,7 +31,7 @@ extern void camelforth(void);
 int linelen = LLENGTH; // = 28
 
 /* buffer required for strings read from flash */
-char namebuf[maxtib];
+// char namebuf[maxtib];
 
 uint8_t* adrs_ram = 0;
 
@@ -125,8 +125,8 @@ const int entries = sizeof dictionary / sizeof dictionary[0];
 /* Find a word in the dictionary, returning its position */
 int locate(void) {
   for (int i = entries - 1; i >= 0; i--) {
-    strcpy(namebuf, dictionary[i].name);
-    if (!strcmp(tib, namebuf)) return i;
+    // strcpy(namebuf, dictionary[i].name);
+    // if (!strcmp(tib, namebuf)) return i;
   }
   return LOCATE_BOUNDS_ERR ; // return 0;
 }
@@ -135,9 +135,9 @@ int locate(void) {
 void words(void) { // 28 Aug 20:05 UTC
     int count_ln = 0; // count of line's length
     for (int i = entries - 2; i >= 0; i--) { // entries - 2 mask the 'nop' word which is a space
-        strcpy(namebuf, dictionary[i].name);
-        count_ln = count_ln + strlen(namebuf) + 1 ; // how long this line is, so far
-        io_write(io, (uint8_t *)namebuf, strlen(namebuf));
+        // strcpy(namebuf, dictionary[i].name);
+        // count_ln = count_ln + strlen(namebuf) + 1 ; // how long this line is, so far
+        // io_write(io, (uint8_t *)namebuf, strlen(namebuf));
         _spc();
         if (count_ln > linelen) { // exceeded
             count_ln = 0; // reset
