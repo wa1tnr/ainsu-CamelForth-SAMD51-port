@@ -4,7 +4,8 @@
 // On branch KM_converser_aa-
 //     On branch xKM_converser_aa-br-bb-
 
-#include "common.h"
+#include <atmel_start.h>
+// #include "common.h"
 // #include "driver_examples.h"
 #include "serial_io.h"
 
@@ -12,7 +13,7 @@ char ch[0]; // holds an 8-bit keystroke
 int read_ln = 0; // how many chars were read
 
 /* Terminal Input Buffer for interpreter */
-char tib[maxtib];
+// char tib[maxtib];
 
 void _USART_read(void) { // hardware implementation-dependent keystroke reader
     // getKey:
