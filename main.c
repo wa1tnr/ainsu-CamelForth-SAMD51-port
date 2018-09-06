@@ -3,14 +3,16 @@
 
 #include <atmel_start.h>
 #include "pins.h"
+#include "clock_gen_OE.h"
+#include "usart_gateway.h"
+/*
 #include "dump.h"
 #include "nyb_stack.h"
-#include "clock_gen_OE.h"
 #include "common.h"
 #include "itoa.h"
 #include "stack_ops.h"
-#include "usart_gateway.h"
 #include "forth.h"
+*/
 
 /* */ /* */ /* */ /* */
 
@@ -28,7 +30,7 @@ int main(void)
     USART_0_example_upper_camelforth(); // atmel start USART driver
 
     /* Replace with your application code */
-    USART_0_example_lower();
+    USART_0_example_lower_camelforth();
 
     while (1) {
     }
