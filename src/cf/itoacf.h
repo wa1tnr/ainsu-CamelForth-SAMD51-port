@@ -5,6 +5,7 @@
 #include "usart_gateway.h"
 
 extern unsigned int *psp;
-extern void itoacf(void);
-extern void itoacfp(void);
+// extern void itoacf(void);
+extern void itoa_write(void);
+// extern void itoacfp(void);
 // extern int pop(void);
