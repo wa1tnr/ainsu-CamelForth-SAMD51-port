@@ -1,15 +1,10 @@
-\  NOW WE GONE GOOD - EXPERIMENT
-\ fantastic
-
-\ : #SD> DEPTH 3C EMIT . 8 EMIT 3E EMIT SPACE ;
-
+\ DOT S word  .S called 'CYA' here.
 HEX
 : #SD> DEPTH [CHAR] < EMIT . 8 EMIT [CHAR] > EMIT SPACE ;
 : ###> <# DUP ABS 0 #S ROT SIGN #> TYPE SPACE ;
 : CYAB 1 DEPTH 0 2 + = IF -1 EXIT THEN ;
 : CYAO 0 DEPTH 0 1 + = IF -1 EXIT THEN ;
-: SELL . ;
-: CYANI
+: DOTTUS
   DEPTH
   BEGIN
       SWAP >R
@@ -24,8 +19,10 @@ HEX
   AGAIN  ;
 : CYA #SD>
   CYAO -1 = IF
-      DROP ." bye. " QUIT THEN 
+      DROP QUIT THEN 
   CYAB -1 = IF
-      DROP DUP ###> ." bye! " QUIT THEN
-  CYANI DROP ;
+      DROP DUP ###> QUIT THEN
+  DOTTUS DROP ;
 
+\ END
+\ : #SD> DEPTH 3C EMIT . 8 EMIT 3E EMIT SPACE ;
