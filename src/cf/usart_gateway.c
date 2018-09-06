@@ -1,19 +1,13 @@
-// Tue Sep  4 09:08:22 UTC 2018
+// Thu Sep  6 03:55:27 UTC 2018
 // On branch camel_forth_to_stand_alone
 
 /* wa1tnr - September, 2018 LGPL v2.1 */
 
+// Tue Sep  4 09:08:22 UTC 2018
+// On branch camel_forth_to_stand_alone
+
 // Mon Sep  3 16:42:24 UTC 2018
 // On branch camel_forth_e_00a-fa-
-
-// Mon Sep  3 05:17:29 UTC 2018
-// On branch camel_forth_e_00a-
-
-// Mon Sep  3 04:16:52 UTC 2018
-// On branch camel_forth_e_00a-
-
-// Sun Sep  2 20:17:50 UTC 2018
-// On branch zKM_converser_d51-aa-
 
 // Wed Aug 29 05:03:11 UTC 2018
 // On branch xKM_converser_d51-nn-
@@ -30,8 +24,10 @@
 #include "debugging.h"
 #include "dict_common.h"
 
+extern void camelforth(void); // pivotal - do not omit!
+
 #define timeStamp(t,l) \
-    "Tue Sep  4 09:08:22 UTC 2018\r\n\r\n", 32
+    "Thu Sep  6 03:55:27 UTC 2018\r\n\r\n", 32
 
 // current target branch:
 #define branchStamp(b,l) \
@@ -39,18 +35,6 @@
 /*
 #define branchStamp(b,l) \
     "On branch camel_forth_e_00a-fa-    ", 35
-
-    "On branch camel_forth_to_stand_alone    ", 40
-
-  // 1234567 101234567 201234567 301234567 4012345678901234567890
-
-*/
-
-// "zKM_converser_d51-aa- +CamelForth +asm   ", 41
-// 1234567 101234567 201234567 301234567 4012345678901234567890
-
-/*
-#define branchStamp(b,l) "KM_converser_d51         ", 25
 */
 
 /*
@@ -107,10 +91,6 @@ void fg_yellow(void) { // foreground yellow
     io_write(io, (uint8_t *)"m", 1);        // for the stanza
 }
 
-/**
- * Example of using USART_0 to write "Hello World" using the IO abstraction.
- */
-
 uint8_t *buf;
 
 void _spc(void) {
@@ -125,10 +105,7 @@ void _que(void) {
 void _ok(void) {
     if ( DEBUG_FORTH_DICT_PRIMITIVES ) {
         io_write(io, (uint8_t *) " ~serial_io.c LINE 73: ",  23);
-                               // 123456789012345678901234567890123456789012345
     }
-    // primary OK prompting at the moment, is here:
-    // io_write(io, (uint8_t *) "okay", 4);
     if (crlfstate == -1) {
         io_write(io, (uint8_t *) " ok\r\n", 5); // echo TODO \r\n on some terminals
         crlfstate = 0;
@@ -156,7 +133,6 @@ void filter(void) {
 
     /* stanza -- CR */
     if ((uint8_t) *buf == 13) { // CR or 0x0d
-        // io_write(io, (uint8_t *) " ok",  3); // need to not do this here
         io_write(io, (uint8_t *) "\015",  1); // 0x0d
         io_write(io, (uint8_t *) "\012",  1); // 0x0a // your terminal may want differently
         return;
@@ -181,25 +157,26 @@ void USART_0_example_upper_camelforth(void) {
     _cr();
 }
 
+/*
 void dispatcher_simple_int(void) {
-    // int rval = number();
     if (number() == 911) { // help
         io_write(io, (uint8_t *) "\r\n\r\n     911 - help\r\n",  21);
         io_write(io, (uint8_t *) "     211 - reboot (warm)\r\n",  26);
     }
     if (number() == 211) _warm();
 }
+*/
 
-void USART_0_example_lower(void) {
+void USART_0_example_lower_camelforth(void) {
     _cr();
 
-#undef HAS_HELLO_INTERPRETER
+    camelforth(); // right here is where CamelForth is invoked!
+
 #define HAS_HELLO_INTERPRETER
+#undef HAS_HELLO_INTERPRETER
 #ifndef HAS_HELLO_INTERPRETER
 
     io_write(io, (uint8_t *) "USART_0_example_upper() .. completes.\r\n", 39); // is alive
-                           // 123456789012345678901234567890123456789012345
-                           //         10        20        30
 #endif // #ifndef HAS_HELLO_INTERPRETER
 
 #ifdef HAS_HELLO_INTERPRETER
@@ -208,8 +185,6 @@ void USART_0_example_lower(void) {
         "Program is configured for 38400 bps speed.\r\n\r\n",        46);
     io_write(io, (uint8_t *)
         "Target MCU board is Adafruit Metro M4 Express.\r\n\r\n",    50);
-
-    //  "Target MCU board is Adafruit Feather M0 Express.\r\n\r\n",  52);
 
     color_reset();
 
@@ -241,20 +216,15 @@ void USART_0_example_lower(void) {
     // PRESERVE TIMESTAMP for lineage verification:
     //  "Mon Aug 27 04:04:40 UTC 2018\r\n\r\n",                      32);
 
-    /*   12345678901234567890123456789012345678901234567890
-                 10        20        30        40        50 */
-
     bg_blue();
     fg_white();
     bg_red();
     io_write(io, (uint8_t *)  "  ainsuForth MTX  ",  18);
-    //     12345678901234567890123456789012345678901234567890
     color_reset();
 
     bg_black();
  // io_write(io, (uint8_t *)"    type 'words': \r\n\r\n",  24);
     io_write(io, (uint8_t *)"                  \r\n\r\n",  22);
-    //             12345678901234567890123456789012345678901234567890
     bg_black();
 
     fg_yellow(); // color it!
@@ -262,24 +232,7 @@ void USART_0_example_lower(void) {
     while(-1) { // endless loop, read one char, write one char (echo)
         readword();
         runword();
-        if ( DEBUG_FORTH_DICT_PRIMITIVES ) {
-            io_write(io, (uint8_t *)" ~readword~ ", 12);
-        }
-/*
-        if (isNumber()) {
-            if ( DEBUG_FORTH_DICT_PRIMITIVES ) {
-                // io_write(io, (uint8_t *)"  ~isNumber~  ", 14);
-                push(number());
-                dot(); // the forth word 'dot' ( a '.' by itself on the command line)
-            }
-            dispatcher_simple_int(); // command processor
-        }
-        tib[0] = ch[0];
-        buf = (uint8_t *)tib;
-        filter();
-        io_write(io, (uint8_t *)tib, 1); // 1  is also length
-        capture_warm();
-*/
     }
+
 #endif // #ifdef HAS_HELLO_INTERPRETER
 }
