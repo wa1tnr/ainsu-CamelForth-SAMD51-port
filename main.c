@@ -2,7 +2,6 @@
 // On branch xKM_converser_d51-nn-
 
 #include <atmel_start.h>
-// #include "serial_io.h"
 #include "pins.h"
 #include "dump.h"
 #include "nyb_stack.h"
@@ -13,24 +12,20 @@
 #include "usart_gateway.h"
 #include "forth.h"
 
-// previous:
-// Tue Aug 28 19:29:30 UTC 2018 // On branch xKM_converser_d51-kk-
-// Tue Aug 21 21:23:47 UTC 2018 // KM_converser_aa-
-
 void delays(void) { // delay some
     for (volatile int i=(3*21040); i>0; i--) {
-        // empty loop
     }
 }
 
+/*
 void blink_two(void) {
-    // clear first
     PORT->Group[PORTA].OUTCLR.reg  = (uint32_t)(1 << 17); // PA17 //  0 13 pinwrite  // D13
     for (int blinks=2; blinks >0; blinks--) {
         PORT->Group[PORTA].OUTTGL.reg  = (uint32_t)(1 << 17); // PA17 //    13 pintoggle // D13
         delays();
     }
 }
+*/
 
 void ldelays(void) {
     for (int ie=7; ie >0; ie--) {
@@ -41,7 +36,9 @@ void ldelays(void) {
 void blink_awhile(void) {
 
     for (int iter=5; iter >0; iter--) {
+/*
         blink_two();
+*/
     }
 }
 
@@ -82,7 +79,9 @@ int main(void)
         if (q > 2)  q = 2;
         if (q < 1)  q = 2;
         for (volatile int i=-1; i<q; i++) {
+/*
             blink_two();
+*/
 
         }
 
