@@ -10,7 +10,7 @@
 #include "stack_ops.h"
 #include "readword.h"
 #include "debugging.h"
-#include "getKey.h"
+// #include "getKey.h"
 
 char spcbuf[2];
 char crbuf[2];
@@ -51,10 +51,12 @@ void runword(void) {
         return;
     }
 
+/*
     if (strlen(tib) == 0) { // reliable test for no input on a cr
         // io_write(io, (uint8_t *)"  strlen(tib) == 0 ", 19);
         _ok(); return;
     }
+*/
 
 /*
     strcpy(crbuf, (char *)'\015');
