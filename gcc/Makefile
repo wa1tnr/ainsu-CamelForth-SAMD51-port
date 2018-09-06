@@ -77,7 +77,6 @@ hal/src/hal_atomic.o \
 pins.o \
 src/dump.o \
 src/nyb_stack.o \
-src/getKey.o \
 src/readword.o \
 src/warm.o \
 src/clock_gen_OE.o \
@@ -94,8 +93,10 @@ src/cf/forth.o \
 src/cf/itoacf.o \
 src/cf/usart_gateway.o \
 src/cf/cmf_itoa.o \
+src/cf/getKey_cf.o \
 main.o
 
+# src/getKey.o \
 # src/serial_io.o \
 
 OBJS_AS_ARGS +=  \
@@ -128,7 +129,6 @@ OBJS_AS_ARGS +=  \
 "pins.o" \
 "src/dump.o" \
 "src/nyb_stack.o" \
-"src/getKey.o" \
 "src/readword.o" \
 "src/warm.o" \
 "src/clock_gen_OE.o" \
@@ -145,8 +145,10 @@ OBJS_AS_ARGS +=  \
 "src/cf/itoacf.o" \
 "src/cf/usart_gateway.o" \
 "src/cf/cmf_itoa.o" \
+"src/cf/getKey_cf.o" \
 "main.o"
 
+# "src/getKey.o" \
 # "src/serial_io.o" \
 
 # List the dependency files
@@ -182,7 +184,6 @@ DEPS_AS_ARGS +=  \
 "pins.d" \
 "src/dump.d" \
 "src/nyb_stack.d" \
-"src/getKey.d" \
 "src/readword.d" \
 "src/warm.d" \
 "src/clock_gen_OE.d" \
@@ -199,8 +200,10 @@ DEPS_AS_ARGS +=  \
 "src/cf/itoacf.d" \
 "src/cf/usart_gateway.d" \
 "src/cf/cmf_itoa.d" \
+"src/cf/getKey_cf.d" \
 "main.d"
 
+# "src/getKey.d" \
 # "src/serial_io.d" \
 
 OUTPUT_FILE_NAME :=AtmelStart
