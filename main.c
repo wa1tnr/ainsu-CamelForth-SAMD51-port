@@ -51,9 +51,7 @@ int main(void)
     uint8_t* rram = 0;
     int q = 0;
 
-//  this 'xec' is now defaulted to disabled, by a commit done this evening.
 
-//  int xec = -1; // true  - yes, do exec
     int xec =  0; // false - no,  do not exec
 
     /* Initializes MCU, drivers and middleware */
@@ -68,23 +66,11 @@ int main(void)
 
     USART_0_example_upper_camelforth(); // atmel start USART driver
 
-    // rram = srdump();
-
-    // iterate the cdump over 19 lines of 16 bytes each:
-    // for (int jk = 19; jk > 0; jk--) {
-
-    // 0x8000 is ram size (32 kb)
-    // That's 0x800 lines of 16 bytes each
-
-    // 0x40000 size of internal flashROM (256 kb)
-
 #define LOCAL_AINSU_OFFSET 8304 // 8304  $2070
 
     if (xec != 0) {
         push(LOCAL_AINSU_OFFSET);
 
-        // 46 seconds
-        // for (int jk = 0x800; jk > 0; jk--) {
 
 
         for (int jk =   0x7; jk > 0; jk--) { // 7 lines
@@ -97,24 +83,17 @@ int main(void)
         if (q < 1)  q = 2;
         for (volatile int i=-1; i<q; i++) {
             blink_two();
-            // ldelays();
+
         }
 
     } // fi xec
 
     /* Replace with your application code */
 
-    // rram = ndump(); // nyb_stack.c
-    // rram = cdump();    // dump.c
 
     _cr(); // examples/driver_examples.c
 
-    // three nice tests in a row:
-    //     call_me_now_ms_cleo();
-    //     push(52801776);
-    //     dot(); // test of print from TOS
 
-    // New location for the demo:
     USART_0_example_lower();
 
     while (1) {
