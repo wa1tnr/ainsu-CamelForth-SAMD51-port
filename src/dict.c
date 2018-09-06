@@ -19,7 +19,7 @@
 #include "math.h"
 #include "flashDict.h"
 #include "warm.h"
-#include "dump.h"
+// #include "dump.h"
 #include "ascii_art.h"
 #include "emit.h"
 #include "fmacros.h" // forth macros
@@ -72,13 +72,15 @@ void help(void) {
                             536870912  decimal.
 */
 
+/*
 void dump(void) { // ( adrs lines --  )
     int popped = pop();
     for (int i= popped; i > 0; i--) {
-        adrs_ram = cdump();
+        // adrs_ram = cdump();
         push(((uint32_t)adrs_ram) + 16); // address of the most recent line dumped
     }
 }
+*/
 
 void words(void); // forward declaration // 28 Aug 22:35 UTC
 
