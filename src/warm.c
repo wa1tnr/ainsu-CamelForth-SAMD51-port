@@ -9,7 +9,7 @@
 #include "driver_init.h"
 #include "utils.h"
 #include "warm.h" // io descriptor
-#include "common.h"
+// #include "common.h"
 
 int state_warm = 0;
 
@@ -28,11 +28,14 @@ void capture_warm(void) { // trap keystrokes to build a command
 
 */
 
+/*
     if ( (state_warm ==  0) && ((uint8_t) *buf != 0x77) ) { // ! 'w'
         state_warm = -1;
         return;
     }
+*/
 
+/*
     if ( (state_warm == 0) && ((uint8_t) *buf == 0x77) ) { // 'w'
         // io_write(io, (uint8_t *) "!w!",  3);
         state_warm = 0x77; // first level gained
@@ -63,6 +66,7 @@ void capture_warm(void) { // trap keystrokes to build a command
         _warm();
         return; // shouldn't reach this
     }
+*/
     // if ( (state_warm == -2) || (state_warm == -1)) return; // preserve penalty
     state_warm = 0; // sieve fall-through
 }
