@@ -68,6 +68,7 @@ gcc/gcc/startup_samd51.o \
 hpl/osc32kctrl/hpl_osc32kctrl.o \
 examples/driver_examples.o \
 driver_init.o \
+cf_usart_ini.o \
 hpl/sercom/hpl_sercom.o \
 hal/src/hal_gpio.o \
 hal/utils/src/utils_event.o \
@@ -120,6 +121,7 @@ OBJS_AS_ARGS +=  \
 "hpl/osc32kctrl/hpl_osc32kctrl.o" \
 "examples/driver_examples.o" \
 "driver_init.o" \
+"cf_usart_ini.o" \
 "hpl/sercom/hpl_sercom.o" \
 "hal/src/hal_gpio.o" \
 "hal/utils/src/utils_event.o" \
@@ -173,6 +175,7 @@ DEPS_AS_ARGS +=  \
 "hal/src/hal_usart_sync.d" \
 "hpl/mclk/hpl_mclk.d" \
 "driver_init.d" \
+"cf_usart_ini.d" \
 "hpl/osc32kctrl/hpl_osc32kctrl.d" \
 "examples/driver_examples.d" \
 "hal/src/hal_sleep.d" \
