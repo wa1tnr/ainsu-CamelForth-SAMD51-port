@@ -1,0 +1,8 @@
+Fri Sep  7 04:00:58 UTC 2018
+
+There's lots left TODO ;)
+
+
+The dump word needs reworking (it is commented out, and
+is found in forth.c).
+
