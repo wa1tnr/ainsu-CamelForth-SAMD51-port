@@ -6,3 +6,29 @@ There's lots left TODO ;)
 The dump word needs reworking (it is commented out, and
 is found in forth.c).
 
+
+USART_GATEWAY.C
+
+The usart_gateway.c file has overgrown its purpose - the
+ansi escape codes need to be split from it.
+
+This file began as examples/driver_examples.c
+
+Definitely has code written by Atmel in it. ;)
+
+Yes.  Here's the early driver_examples.c code from Atmel Start:
+
+#include "driver_examples.h"
+#include "driver_init.h"
+#include "utils.h"
+ /**
+ * Example of using USART_5 to write "Hello World" using the IO abstraction.
+ */
+void USART_5_example(void)
+{
+	struct io_descriptor *io;
+	usart_sync_get_io_descriptor(&USART_5, &io);
+	usart_sync_enable(&USART_5);
+ 	io_write(io, (uint8_t *)"Hello World!", 12);
+}
+
