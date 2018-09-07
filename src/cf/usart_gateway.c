@@ -6,13 +6,13 @@
 #include "driver_init.h"
 // #include "common.h"
 #include "getKey_cf.h" // SAMD51 dependency for now (06 SEP 2018)
-#include "utils.h"
-#include "warm.h"
-#include "readword.h"
-#include "runword.h"
-#include "stack_ops.h"
-#include "debugging.h"
-#include "dict_common.h"
+// #include "utils.h"
+// #include "warm.h"
+// #include "readword.h"
+// #include "runword.h"
+// #include "stack_ops.h"
+// #include "debugging.h"
+// #include "dict_common.h"
 
 extern void camelforth(void); // pivotal - do not omit!
 
@@ -147,10 +147,10 @@ void _que(void) {
 }
 
 void _ok(void) {
-    if (crlfstate == -1) {
+    // if (crlfstate == -1) {
         io_write(io, (uint8_t *) " ok\r\n", 5); // echo TODO \r\n on some terminals
-        crlfstate = 0;
-    }
+        // crlfstate = 0;
+    // }
 }
 
 #define HAS_FILTER_AINSU
