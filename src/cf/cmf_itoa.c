@@ -16,7 +16,8 @@
 #define maxtib 16
 #define stackbufferlen 64
 extern uint8_t *buf;
-#include "serial_io.h"
+// #include "serial_io.h"
+#include "usart_gateway.h"
 #include <string.h>
 // char pr_strn[stackbuflen];
 // char pr_strn[stackbufferlen];
