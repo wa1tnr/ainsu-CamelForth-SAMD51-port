@@ -1,10 +1,13 @@
 /****h* camelforth/samd51.inc
+ *
+ * from:
  ****h* camelforth/tivaio.c
+ *
  * NAME
- *  tivaio.c
+ *  samd51.inc
  * DESCRIPTION
  *  Terminal I/O, MCU initialization, and main entry point for 
- *  CamelForth in C, for the TM4C1294XL Tiva-C Launchpad.
+ *  CamelForth in C, for the ATSAMD51J19A Adafruit Metro M4 Express target board.
  * SYNOPSIS
  *  Provides the functions
  *      void putch(char c)      write one character to terminal
@@ -12,9 +15,10 @@
  *      int getquery(void)      return true if keyboard char available
  *      void initTermios(void)  configure terminal for Forth
  *      void resetTermios(void) reset terminal configuration, if req'd
- *      int main(void)          main entry point for Tiva-C
- * AUTHOR
+ *      int main(void)          main entry point for SAMD51
+ * AUTHORS
  *  Brad Rodriguez
+ *  wa1tnr
  ******
  * LICENSE TERMS
  *  CamelForth in C 
@@ -44,73 +48,12 @@
 */
 
 #include <atmel_start.h>
-
-// extern struct io_descriptor *io;
-#include "serial_io.h"  // io_write's  'io'
-// #include "common.h"     // ainsu: maxtib
-#include "stack_ops.h"  // ainsu push(int p)
-#include "emit.h"       // ainsu emit
-// #include "getKey.h"     // ainsu
 #include "getKey_cf.h"  // REQUIRED Atmel SAMD51 port, for now (06 SEP 2018)
 
 // #define NULL 0  // already defined for Atmel Start and gcc:
 
 // lib/gcc/arm-none-eabi/7.3.1/include/stddef.h:406:0: note: this is the location of the previous definition
 // #define NULL ((void *)0)
-
-// TivaWare functions //
-/*
-#include "inc/hw_memmap.h"
-#include "inc/hw_types.h"
-
-#include "driverlib/gpio.h"
-#include "drivers/pinout.h"
-#include "driverlib/pin_map.h"
-#include "driverlib/rom.h"
-#include "driverlib/rom_map.h"
-#include "driverlib/sysctl.h"
-#include "driverlib/uart.h"
-#include "driverlib/gpio.h"
-#include "driverlib/sysctl.h"
-#include "driverlib/uart.h"
-#include "utils/uartstdio.h"
-*/
-
-// Use SYSCTL_XTAL_25MHZ for TM4C129 Launchpad. //
-// #define SYSCTL_XTAL_MHZ SYSCTL_XTAL_25MHZ
-
-
-/****f* main/ConfigureUART
- * NAME
- *  ConfigureUART
- * SYNOPSIS
- *  void ConfigureUART(uint32_t clockfreq)
- * DESCRIPTION
- *  Configure UART and its pins, for 115200 baud using main system clock.
- * NOTES
- *  Based on a function provided by Texas Instruments;
- *  modified to accept clockfreq as a parameter.
- ******
- */
-
-/*
-void ConfigureUART(uint32_t clockfreq)
-{
-    // Enable the GPIO Peripheral used by the UART.
-    ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-
-    // Enable UART0.
-    ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
-
-    // Configure GPIO Pins for UART mode.
-    ROM_GPIOPinConfigure(GPIO_PA0_U0RX);
-    ROM_GPIOPinConfigure(GPIO_PA1_U0TX);
-    ROM_GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
-
-    // Initialize the UART for terminal I/O at 115.2 Kbaud
-    UARTStdioConfig(0, 115200, clockfreq);
-}
-*/
 
 /*
  * Terminal I/O functions
@@ -127,7 +70,6 @@ void ucf_emit(void) {
     uint32_t  rbyte = 0;
     int       char_r   =  '0';
     char      *cbyte;
-    // rbyte = pop();
     rbyte = cfcfc;
 
     cbyte = (char*) &rbyte;
@@ -135,7 +77,6 @@ void ucf_emit(void) {
     char *dfbyte = (char*) df;
     char_r = (int)dfbyte;
     io_write(io, (uint8_t *) char_r, 1);
-    // io_write(io, (uint8_t *)"  ~EMIT~  ", 10);
 }
 
 void putch(char c) {
@@ -168,85 +109,29 @@ int getquery(void) {
  ******
  */
 
-/*
-uint32_t g_ui32SysClock;        // global variable //
-*/
-
 void interpreter(void);         /* forward reference */
 
 void camelforth(void)
 {
-    // ----- THE FOLLOWING IS ADAPATED FROM TI INITIALIZATION CODE -----
-
-    // Set the clocking to run from the crystal at 120MHz.
-/*
-    g_ui32SysClock = MAP_SysCtlClockFreqSet((SYSCTL_XTAL_MHZ |
-                                             SYSCTL_OSC_MAIN |
-                                             SYSCTL_USE_PLL |
-                                             SYSCTL_CFG_VCO_480), 120000000);   
-*/
-
-    // Initialize Launchpad-specific I/O
-    // Enable the GPIO port that is used for the on-board LEDs.
-/*
-    ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
-*/
-
-    // Enable the GPIO pins for the LEDs (PN0 & PN1).
-    // initially PN0 off, PN1 on
-/*
-    ROM_GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_0 | GPIO_PIN_1);
-    ROM_GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_1);
-*/
-    
-    // Initialize UART0 for terminal I/O
-/*
-    ConfigureUART(g_ui32SysClock);  // this enables UART0 and GPIOA.
-*/
-    
-    // ------------- END OF ADAPTED TI INITIALIZATION CODE -------------
 
  // while (1) {     /* loop in case interpreter() ever terminates */
-
-        // UARTprintf("\nCamelForth in C - Tiva-C testing\n");
-
         fg_white();
         bg_blue();
         print_this("(leaving ainsuForth MTX)", 24);
         bg_black();
         print_this("\n", 1);
         fg_yellow();
-
-                   // 1234567 101234567 201234567 301234567 40
         print_this("\nCamelForth in C - SAMD51 testing\n", 34);
 
    // ------------------
         interpreter();
    // ------------------
 
-   /*
-        print_this("\n", 1);
-        italics(); bg_black(); fg_white(); // white italics
-        print_this("(entering ainsuForth MTX)", 25);
-    */
         color_reset();
-     // print_this("\n", 1);
         bg_black();
         bold_italics();
         fg_white(); // bold white italics
         print_this("(entering ainsuForth MTX)", 25);
-
-   /*
-        color_reset();
-        print_this("\n", 1);
-        bg_black(); color_bold(); fg_white(); // bold white
-        print_this("(entering ainsuForth MTX)", 25);
-
-        color_reset();
-        print_this("\n", 1);
-        bg_black();               fg_white(); // non bold white
-        print_this("(entering ainsuForth MTX)", 25);
-   */
         color_reset();
         bg_black(); fg_yellow();
  // }
