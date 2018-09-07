@@ -1,12 +1,14 @@
+// Fri Sep  7 04:02:25 UTC 2018
+// On branch progressive_Edits_ad-
 
 extern struct io_descriptor *io;
 
 #define timeStamp(t,l) \
-    "Fri Sep  7 02:53:11 UTC 2018\n\n", 32
+    "Fri Sep  7 04:02:25 UTC 2018\n\n", 32
 
 // current target branch:
 #define branchStamp(b,l) \
-    "On branch progressive_Edits_ac-    ", 35
+    "On branch progressive_Edits_ad-    ", 35
 
 /*
     "On branch camel_forth_to_stand_alone    ", 40
