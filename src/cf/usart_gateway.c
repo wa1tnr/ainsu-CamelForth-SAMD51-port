@@ -11,21 +11,6 @@
 
 extern void camelforth(void); // pivotal - do not omit!
 
-#define timeStamp(t,l) \
-    "Fri Sep  7 02:10:29 UTC 2018\n\n", 32
-
-// current target branch:
-#define branchStamp(b,l) \
-    "On branch progressive_Edits_ab-    ", 35
-
-/*
-    "On branch camel_forth_to_stand_alone    ", 40
-*/
-
-/*
-#define branchStamp(b,l) "master    +CamelForth    ", 25
-*/
-
 struct io_descriptor *io;
 
 void usart_sync_get_desc(void) {
@@ -247,7 +232,5 @@ void USART_0_example_lower_camelforth(void) {
         io_write(io, (uint8_t *) "USART_0_example_lower_camelforth() .. completes.\n", 49); // is alive
         color_reset(); // no italics
         io_write(io, (uint8_t *) "\n", 1);
-     // readword(); // ainsu hooks
-     // runword();  // ainsu hooks
     }
 }
