@@ -7,7 +7,8 @@
 #include <atmel_start.h>
 // #include "common.h"
 // #include "driver_examples.h"
-#include "serial_io.h"
+// #include "serial_io.h"
+#include "usart_gateway.h"
 
 char ch[0]; // holds an 8-bit keystroke
 int read_ln = 0; // how many chars were read
