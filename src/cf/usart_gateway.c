@@ -61,7 +61,13 @@ void color_reset(void) {  // reset color
     io_write(io, (uint8_t *)"m", 1);        // for the stanza
 }
 
-void fg_white(void) {
+void color_bold(void) {
+    io_write(io, (uint8_t *)"\033\133", 2); // ESC [
+    io_write(io, (uint8_t *)"\061", 1);     // 1
+    io_write(io, (uint8_t *)"m", 1);        // for the stanza
+}
+
+void fg_white_force_bold(void) {
     io_write(io, (uint8_t *)"\033\133", 2); // ESC [
     io_write(io, (uint8_t *)"\060", 1);     // 0
     io_write(io, (uint8_t *)"\073", 1);     // ;  semicolon
@@ -71,11 +77,57 @@ void fg_white(void) {
     io_write(io, (uint8_t *)"m", 1);        // for the stanza
 }
 
+void fg_white(void) {
+    io_write(io, (uint8_t *)"\033\133", 2); // ESC [
+    io_write(io, (uint8_t *)"\063\067", 2); // 37 - white  fg
+    io_write(io, (uint8_t *)"m", 1);        // for the stanza
+}
+
 void fg_magenta(void) {
     io_write(io, (uint8_t *)"\033\133", 2); // ESC [
     io_write(io, (uint8_t *)"\063\065", 2); // 35 - yellow fg
     io_write(io, (uint8_t *)"m", 1);        // for the stanza
 }
+
+void bold_italics_white(void) { // specify ^[[1;03;37m
+    io_write(io, (uint8_t *)"\033\133", 2); // ESC [
+    io_write(io, (uint8_t *)"\061", 1);     // 1 // bold flag?
+    io_write(io, (uint8_t *)"\073", 1);     // ;  semicolon
+    io_write(io, (uint8_t *)"\060\063", 2); // 03 - some name for this one
+    io_write(io, (uint8_t *)"\073", 1);     // ;  semicolon
+    io_write(io, (uint8_t *)"\063\067", 2); // 37 - white  fg
+    io_write(io, (uint8_t *)"m", 1);        // for the stanza
+}
+
+void italics(void) {
+    io_write(io, (uint8_t *)"\033\133", 2); // ESC [
+    io_write(io, (uint8_t *)"\060\063", 2); // 03 - some name for this one
+    io_write(io, (uint8_t *)"m", 1);        // for the stanza
+}
+
+void bold_italics(void) {
+    color_bold();
+    italics();
+}
+
+void n1uro_italics(void) {
+    io_write(io, (uint8_t *)"\033\133", 2); // ESC [
+    io_write(io, (uint8_t *)"\060\063", 2); // 03 - some name for this one
+    io_write(io, (uint8_t *)"\073", 1);     // ;  semicolon
+    io_write(io, (uint8_t *)"\063\066", 2); // 36 - cyan maybe thunderstorm comin'
+    io_write(io, (uint8_t *)"m", 1);        // for the stanza
+}
+
+/* italics - NOTES
+
+   2^1 probably raises italics.
+   2^0 when set raises bold.
+
+    io_write(io, (uint8_t *)
+    io_write(io, (uint8_t *)
+*/
+
+/* SOURCE string: "   [03;36m " */
 
 void fg_yellow(void) { // foreground yellow
     io_write(io, (uint8_t *)"\033\133", 2); // ESC [
@@ -191,9 +243,10 @@ void USART_0_example_lower_camelforth(void) {
     while(-1) { // endless loop
         camelforth(); // right here is where CamelForth is invoked!
         io_write(io, (uint8_t *) "\n", 1);
+        italics();
         fg_magenta();
-        io_write(io, (uint8_t *) "USART_0_example_upper_camelforth() .. completes.\n", 49); // is alive
-        color_reset();
+        io_write(io, (uint8_t *) "USART_0_example_lower_camelforth() .. completes.\n", 49); // is alive
+        color_reset(); // no italics
         io_write(io, (uint8_t *) "\n", 1);
      // readword(); // ainsu hooks
      // runword();  // ainsu hooks
