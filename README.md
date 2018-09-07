@@ -1,17 +1,10 @@
 # ainsuCFxd51-a
 
-  git remote add origin https://github.com/wa1tnr/ainsuForth-CF-samd51-forth.git 
-
-(from ainsuMtxd51)
-
 # NEWS
 
-CamelForth is now embedded into this forth-like interpreter!
+CamelForth
 
-  'forth' starts CamelForth.  Please use ALL CAPS when
-addressing CamelForth.
-
-  There is no exit (just reboot to get out of CamelForth).
+  Please use ALL CAPS when addressing CamelForth.
 
 http://camelforth.com/news.php
 
@@ -20,28 +13,7 @@ Misc: Brad R @ Friday 15 December 2017 - 14:38:49
 
 # Status
 
-Working small, Forth-like interpreter (type 'words' for help).
-
-    On branch KM_converser_d51
-
-For SAMD51 (here) and SAMD21 (elsewhere; similarly-named repository)
-
-Most recent work is here.  SAMD21 repository is lagging behind quite a bit.
-
-# Intent
-
-ainsuForth (without CamelForth added) is a working, USART-
-tethered interpreter that exhibits a very small number of
-behaviors reminiscent of forth.
-
-It can execute arbitrary functions coded in C, through a
-pleasant tty (typewriter-like) interface at 38400 bps.
-
-Intent is to use this primitive environment as a way 'in' ..
-as a debug monitor running on the hardware itself -- to try
-to do something a bit more interesting there.
-
-(LATER: CamelForth was added - that is truly interesting!)
+CamelForth is running well on ATSAMD51J19A.
 
 # Build Environment
 
@@ -76,10 +48,12 @@ Makefile is a modification of Atmel Start's version, with which
 it is fundamentally compatible, except for the way the bootloader
 is handled:
 
-  $ cat ../ainsuMtxd51-exp/gcc/Makefile | egrep bootl
+UNTESTED EDITS:
+
+  $ cat ../ainsuCFxd51-a/gcc/Makefile | egrep bootl
 -T"../gcc/gcc/samd51j19a_flash_with_bootloader.ld" \
 
- $ cat ../ainsuMtxd51-exp/gcc/gcc/samd51j19a_flash_with_bootloader.ld | sed 46q | tail -12
+ $ cat ../ainsuCFxd51-a/gcc/gcc/samd51j19a_flash_with_bootloader.ld | sed 46q | tail -12
 
 /* Memory Spaces Definitions */
 MEMORY
@@ -103,7 +77,7 @@ Arduino IDE bossac, which already works fine with SAMD51).
 
  $ ./scripts/_bossac_local.sh ./AtmelStart.bin (is what's in the Makefile)
 
- $ cat ../ainsuMtxd51-exp/gcc/scripts/_bossac_local.sh  (excerpt):
+ $ cat ../ainsuCFxd51-a/gcc/scripts/_bossac_local.sh  (excerpt):
 
 Call with one argument - the path/file.bin (not .uf2) to upload using bossac
 
@@ -118,17 +92,9 @@ over the bootloader).
 Bossac may be in more than one version in the Arduino IDE
 sub-tree; 1.8.0-48 was present and was used, here.
 
-# Lineage:
+Fri Sep  7 02:53:11 UTC 2018
+On branch progressive_Edits_ac-
 
-# samd51_USART_basic
-   * clocks and very basic USART support
+ $ cat ./README.md | sed 98q | md5sum
 
-# ainsuMtxd21
-  * more recent work on the command processor/interpreter loop code
-
-Sun Sep  2 05:11:12 UTC 2018
-On branch zKM_converser_d51-aa-
-
- $ cat cat ./README.md | sed 65q | md5sum
-
-ef128a300f16137485b9ace186131999
+55545d307a0071e63f0913e5c3d5
