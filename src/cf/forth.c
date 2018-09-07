@@ -43,9 +43,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include "forth.h"
-// #include "common.h" // ainsu
-#include "ainsu_common.h" // ainsu
-// #include "itoa.h"   // ainsu's Arduino LLC code
+#include "common.h"
 #include "cmf_itoa.h" // CamelForth - Arduino LLC code
 #include "itoacf.h" // ainsu
 

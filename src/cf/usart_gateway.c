@@ -6,6 +6,7 @@
 // Thu Sep  6 03:55:27 UTC 2018
 // On branch camel_forth_to_stand_alone
 
+#include "usart_gateway.h"
 #include "driver_init.h"
 #include "getKey_cf.h" // SAMD51 dependency for now (06 SEP 2018)
 

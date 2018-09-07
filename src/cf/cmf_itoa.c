@@ -11,16 +11,12 @@
 */
 
 #include <atmel_start.h>
-// #include "common.h"
-#include "ainsu_common.h"
-#define maxtib 16
+#include "common.h"
+// #define maxtib 16
 #define stackbufferlen 64
 extern uint8_t *buf;
-// #include "serial_io.h"
 #include "usart_gateway.h"
 #include <string.h>
-// char pr_strn[stackbuflen];
-// char pr_strn[stackbufferlen];
 char print_string[stack_buffer_length];
 int input_integer = 0;
 
