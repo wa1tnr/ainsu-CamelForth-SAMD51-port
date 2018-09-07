@@ -1,27 +1,26 @@
-// Thu Sep  6 03:55:27 UTC 2018
-// On branch camel_forth_to_stand_alone
+// Fri Sep  7 02:10:29 UTC 2018
+// On branch progressive_Edits_ab-
 
 /* wa1tnr - September, 2018 LGPL v2.1 */
 
+// Thu Sep  6 03:55:27 UTC 2018
+// On branch camel_forth_to_stand_alone
+
 #include "driver_init.h"
-// #include "common.h"
 #include "getKey_cf.h" // SAMD51 dependency for now (06 SEP 2018)
-// #include "utils.h"
-// #include "warm.h"
-// #include "readword.h"
-// #include "runword.h"
-// #include "stack_ops.h"
-// #include "debugging.h"
-// #include "dict_common.h"
 
 extern void camelforth(void); // pivotal - do not omit!
 
 #define timeStamp(t,l) \
-    "Thu Sep  6 03:55:27 UTC 2018\n\n", 32
+    "Fri Sep  7 02:10:29 UTC 2018\n\n", 32
 
 // current target branch:
 #define branchStamp(b,l) \
+    "On branch progressive_Edits_ab-    ", 35
+
+/*
     "On branch camel_forth_to_stand_alone    ", 40
+*/
 
 /*
 #define branchStamp(b,l) "master    +CamelForth    ", 25
