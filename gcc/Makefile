@@ -75,20 +75,6 @@ hal/src/hal_sleep.o \
 atmel_start.o \
 hal/src/hal_atomic.o \
 pins.o \
-src/dump.o \
-src/nyb_stack.o \
-src/readword.o \
-src/warm.o \
-src/clock_gen_OE.o \
-src/stack_ops.o \
-src/itoa.o \
-src/dict.o \
-src/runword.o \
-src/math.o \
-src/ascii_art.o \
-src/emit.o \
-src/programs.o \
-src/asm_test.o \
 src/cf/forth.o \
 src/cf/itoacf.o \
 src/cf/usart_gateway.o \
@@ -96,6 +82,20 @@ src/cf/cmf_itoa.o \
 src/cf/getKey_cf.o \
 main.o
 
+# src/asm_test.o \
+# src/programs.o \
+# src/ascii_art.o \
+# src/math.o \
+# src/runword.o \
+# src/itoa.o \
+# src/stack_ops.o \
+# src/clock_gen_OE.o \
+# src/warm.o \
+# src/nyb_stack.o \
+# src/readword.o \
+# src/dict.o \
+# src/emit.o \
+# src/dump.o \
 # src/getKey.o \
 # src/serial_io.o \
 
@@ -127,20 +127,6 @@ OBJS_AS_ARGS +=  \
 "atmel_start.o" \
 "hal/src/hal_atomic.o" \
 "pins.o" \
-"src/dump.o" \
-"src/nyb_stack.o" \
-"src/readword.o" \
-"src/warm.o" \
-"src/clock_gen_OE.o" \
-"src/stack_ops.o" \
-"src/itoa.o" \
-"src/dict.o" \
-"src/runword.o" \
-"src/math.o" \
-"src/ascii_art.o" \
-"src/emit.o" \
-"src/programs.o" \
-"src/asm_test.o" \
 "src/cf/forth.o" \
 "src/cf/itoacf.o" \
 "src/cf/usart_gateway.o" \
@@ -148,6 +134,20 @@ OBJS_AS_ARGS +=  \
 "src/cf/getKey_cf.o" \
 "main.o"
 
+# "src/asm_test.o" \
+# "src/programs.o" \
+# "src/ascii_art.o" \
+# "src/math.o" \
+# "src/runword.o" \
+# "src/itoa.o" \
+# "src/stack_ops.o" \
+# "src/clock_gen_OE.o" \
+# "src/warm.o" \
+# "src/nyb_stack.o" \
+# "src/readword.o" \
+# "src/dict.o" \
+# "src/emit.o" \
+# "src/dump.o" \
 # "src/getKey.o" \
 # "src/serial_io.o" \
 
@@ -182,20 +182,6 @@ DEPS_AS_ARGS +=  \
 "hpl/oscctrl/hpl_oscctrl.d" \
 "atmel_start.d" \
 "pins.d" \
-"src/dump.d" \
-"src/nyb_stack.d" \
-"src/readword.d" \
-"src/warm.d" \
-"src/clock_gen_OE.d" \
-"src/stack_ops.d" \
-"src/itoa.d" \
-"src/dict.d" \
-"src/runword.d" \
-"src/math.d" \
-"src/ascii_art.d" \
-"src/emit.d" \
-"src/programs.d" \
-"src/asm_test.d" \
 "src/cf/forth.d" \
 "src/cf/itoacf.d" \
 "src/cf/usart_gateway.d" \
@@ -203,6 +189,20 @@ DEPS_AS_ARGS +=  \
 "src/cf/getKey_cf.d" \
 "main.d"
 
+# "src/asm_test.d" \
+# "src/programs.d" \
+# "src/ascii_art.d" \
+# "src/math.d" \
+# "src/runword.d" \
+# "src/itoa.d" \
+# "src/stack_ops.d" \
+# "src/clock_gen_OE.d" \
+# "src/warm.d" \
+# "src/nyb_stack.d" \
+# "src/readword.d" \
+# "src/dict.d" \
+# "src/emit.d" \
+# "src/dump.d" \
 # "src/getKey.d" \
 # "src/serial_io.d" \
 
