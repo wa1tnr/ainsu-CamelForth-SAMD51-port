@@ -224,10 +224,30 @@ void camelforth(void)
         interpreter();
    // ------------------
 
-        bg_red(); fg_white();
-
+   /*
+        print_this("\n", 1);
+        italics(); bg_black(); fg_white(); // white italics
+        print_this("(entering ainsuForth MTX)", 25);
+    */
+        color_reset();
+     // print_this("\n", 1);
+        bg_black();
+        bold_italics();
+        fg_white(); // bold white italics
         print_this("(entering ainsuForth MTX)", 25);
 
+   /*
+        color_reset();
+        print_this("\n", 1);
+        bg_black(); color_bold(); fg_white(); // bold white
+        print_this("(entering ainsuForth MTX)", 25);
+
+        color_reset();
+        print_this("\n", 1);
+        bg_black();               fg_white(); // non bold white
+        print_this("(entering ainsuForth MTX)", 25);
+   */
+        color_reset();
         bg_black(); fg_yellow();
  // }
 }
