@@ -6,13 +6,14 @@
  * to avoid losing it when reconfiguring.
  */
 
-#include "driver_init.h"
-#include <peripheral_clk_config.h>
-#include <utils.h>
-#include <hal_init.h>
+// #include "driver_init.h"
+// #include <peripheral_clk_config.h>
+// #include <utils.h>
+// #include <hal_init.h>
 
-struct usart_sync_descriptor USART_0;
+// struct usart_sync_descriptor USART_0;
 
+/*
 void USART_0_PORT_init(void)
 {
 
@@ -35,7 +36,9 @@ void USART_0_init(void)
 	usart_sync_init(&USART_0, SERCOM3, (void *)NULL);
 	USART_0_PORT_init();
 }
+*/
 
+/*
 void system_init(void)
 {
 	// init_mcu();  TODO wa1tnr 27 Aug: why does this inhibit 'things'? (everything iirc)
@@ -84,3 +87,4 @@ void system_init(void)
 
 	USART_0_init();
 }
+*/
