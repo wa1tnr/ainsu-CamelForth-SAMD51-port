@@ -1,0 +1,11 @@
+// Sat Sep  8 06:22:31 UTC 2018
+// On branch re_Edits_todo_aa-
+
+This branch makes use of sprintf() for the first time in
+this program's recent edit history (with wa1tnr).
+
+The base-sensitive varieties of the .S word are now
+established; some need to be renamed, and the user
+interface (wordlist) could stand to lose the clutter,
+perhaps.
+
