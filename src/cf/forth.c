@@ -46,6 +46,7 @@
 #include "common.h"
 #include "cmf_itoa.h" // CamelForth - Arduino LLC code
 #include "itoacf.h" // ainsu
+#include "stdio.h"
 
 /*
  * DATA STACKS
@@ -594,61 +595,91 @@ CODE(keyq) {
     // *--psp = 1; // getquery();  /* TODO KLUDGE */
 }
 
+
+void itoa_write_8x(void) {
+    int length_print_string = 0;
+    print_string[0] = (uint32_t) "\0";
+    sprintf(print_string, "%8X", input_integer); // printf(" %2x", *psp++);
+    length_print_string = strlen(print_string);
+
+// * * * CAUTION * * *   old len_pr_strn still hanging around * * *
+    io_write(io, (uint8_t *)print_string, length_print_string); // WRITE OUTPUT TO USART
+    // _spc(); // print formatting/spacing
+
+}
+
+
+void itoa_write_2x(void) {
+    int length_print_string = 0;
+    print_string[0] = (uint32_t) "\0";
+    sprintf(print_string, "%2X", input_integer); // printf(" %2x", *psp++);
+    length_print_string = strlen(print_string);
+    io_write(io, (uint8_t *)print_string, length_print_string); // WRITE OUTPUT TO USART
+}
+
+void itoa_write_d(void) {
+    int length_print_string = 0;
+    print_string[0] = (uint32_t) "\0";
+    sprintf(print_string, "%d", input_integer); // printf(" %2x", *psp++);
+    length_print_string = strlen(print_string);
+    io_write(io, (uint8_t *)print_string, length_print_string); // WRITE OUTPUT TO USART
+}
+
 CODE(dot) {        /* temporary definition for testing */
+    int popped = *psp++;
+    input_integer = popped;
     // printf(" %d", *psp++);
     // print_this
     // itoacf();
-    itoa_write();
+    itoa_write_d(); // was _d but inactive code
 }
 
 CODE(dothh) {        /* temporary definition for testing */
+    int popped = *psp++;
+    input_integer = popped;
     // printf(" %2x", *psp++);
     // itoacf();
-    itoa_write();
+    itoa_write_2x();
 }
 
 CODE(dothhhh) {        /* temporary definition for testing */
     // printf(" %8x", *psp++);
     // itoacf();
-    itoa_write();
+    itoa_write_8x();
 }
 
+// dawts already, then dhots just like it, and dotsd() in code needed.
 
-
-
-
-/* KLUDGE TODO wa1tnr */
-CODE(dots) {    /* print stack, for testing */
+CODE(dotsd) { /* decimal stack print */
     unsigned int *p;
-    p = &pstack[PSTACKSIZE-2];      // deepest element on stack //
-    int len_pr_strn = 0;
-    int p_pped = (uint32_t) p;
-//  pr_strn[0] = (uint32_t) "\0";
-//  extern char print_string[stack_buffer_length];
-    print_string[0] = (uint32_t) "\0";
-    // input_intgr = p_pped;
-    input_integer = p_pped;
-    // cmf_itoa(input_intgr, pr_strn); // Arduino LLC code
-    cmf_itoa(input_integer, print_string); // Arduino LLC code
-    len_pr_strn = strlen(print_string);
-    io_write(io, (uint8_t *)print_string, len_pr_strn);
-    _spc(); // print formatting/spacing
-    // printf("\n%8x:", (unsigned int)p);
+    p = &pstack[PSTACKSIZE-2];
+    int popped = (uint32_t) p; 
+    input_integer = popped;
+    itoa_write_2x(); // can be 8x variant
+    putch(':');
+    putch(' ');
     while (p >= psp) { // printf(" %8x", *p--);
-        // input_intgr = *p--;
         input_integer  = *p--;
-        // pr_strn[0] = (uint32_t) "\0";
-        print_string[0] = (uint32_t) "\0";
-
-        // cmf_itoa(input_intgr, pr_strn); // Arduino LLC code
-
-        cmf_itoa(input_integer, print_string); // Arduino LLC code
-
-        len_pr_strn = strlen(print_string);
-        io_write(io, (uint8_t *) print_string, len_pr_strn);
-        _spc(); // print formatting/spacing
+        itoa_write_d(); // can be 8x variant
+        putch(' '); // leaves an ASCII 32 (space) char at end of line?
     }
+}
 
+CODE(dotsh) {    /* print stack in hexadecimal, for testing */
+    unsigned int *p;
+    p = &pstack[PSTACKSIZE-2];
+    int popped = (uint32_t) p; 
+    input_integer = popped;
+    // printf("\n%8x:", (unsigned int)p);
+    itoa_write_2x(); // can be 8x variant
+    // putch('\010'); // backspace
+    putch(':');
+    putch(' ');
+    while (p >= psp) { // printf(" %8x", *p--);
+        input_integer  = *p--;
+        itoa_write_2x();
+        putch(' '); // leaves an ASCII 32 (space) char at end of line?
+    }
 }
 
 /* KLUDGE TODO wa1tnr */
@@ -775,7 +806,8 @@ PRIMITIVE(keyq);
 // PRIMITIVE(dot);
 PRIMITIVE(dothh);
 PRIMITIVE(dothhhh);
-PRIMITIVE(dots);
+PRIMITIVE(dotsh);
+PRIMITIVE(dotsd);
 PRIMITIVE(dump);
 PRIMITIVE(bye);
 
@@ -998,8 +1030,19 @@ THREAD(udot) = { Fenter, Tlessnum, Tzero, Tnums, Tnumgreater, Ttype,
                 Tspace, Texit };
 THREAD(dot) = { Fenter, Tlessnum, Tdup, Tabs, Tzero, Tnums, Trot, Tsign,
                 Tnumgreater, Ttype, Tspace, Texit };
+
+THREAD(dhots) = { Fenter, Tlit, LIT(10), Tbase, Tfetch, Tminus, Tzeroequal,
+                  Tqbranch, OFFSET(2), Tdotsd, Texit };
+
+THREAD(dawts) = { Fenter, Tlit, LIT(16), Tbase, Tfetch, Tminus, Tzeroequal,
+                  Tqbranch, OFFSET(2), Tdotsh, Texit };
+
+THREAD(dotus) = { Fenter, Tlit, LIT(16), Tbase, Tfetch, Tminus, Tzeroequal,
+                  Tqbranch, OFFSET(3), Tdotsh, Texit, Tdotsd, Texit };
+
 THREAD(decimal) = { Fenter, Tlit, LIT(10), Tbase, Tstore, Texit };
 THREAD(hex) = { Fenter, Tlit, LIT(16), Tbase, Tstore, Texit };
+
 
 /* INTERPRETER */
 
@@ -1490,7 +1533,10 @@ HEADER(numgreater, nums, 0, "\002#>");
 HEADER(sign, numgreater, 0, "\004SIGN");
 HEADER(udot, sign, 0, "\002U.");
 HEADER(dot, udot, 0, "\001.");
-HEADER(decimal, dot, 0, "\007DECIMAL");
+HEADER(dhots, dot,   0, "\003.SD");
+HEADER(dawts, dhots, 0, "\003.SH");
+HEADER(dotus, dawts, 0, "\002.S");
+HEADER(decimal, dotus, 0, "\007DECIMAL");
 HEADER(hex, decimal, 0, "\003HEX");
 HEADER(source, hex, 0, "\006SOURCE");
 HEADER(slashstring, source, 0, "\007/STRING");
@@ -1563,7 +1609,8 @@ HEADER(marker, environmentq, 0, "\006MARKER");
 /* for testing */
 HEADER(dothh, marker, 0, "\003.HH");
 HEADER(dothhhh, dothh, 0, "\005.HHHH");
-HEADER(dots, dothhhh, 0, "\002.S");
-HEADER(dump, dots, 0, "\004DUMP");
+HEADER(dotsh, dothhhh, 0, "\006.DAWTS"); // TODO naming properly
+HEADER(dump, dotsh, 0, "\004DUMP");
 HEADER(words, dump, 0, "\005WORDS");
 HEADER(cold, words, 0, "\004COLD");
+
